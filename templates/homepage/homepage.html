@@ -1,0 +1,48 @@
+{% extends "homepage/base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <div class="content">
+        <div class="text-box">
+            <h2>Health<br><span>Warehouse</span></h2>
+            <p>Computer science project on integrating databases with Python.</p>
+
+            <a href="/project">View Project</a>
+        </div>
+
+        <div class="img-box">
+            <img src="../../static/images/flask.png" class="image" alt="">
+        </div>
+    </div>
+
+    <ul class="thumbnail">
+        <li>
+            <img
+                    src="../../static/images/python.png"
+                    alt=""
+                    onclick="thumbnailPicker('../../static/images/python.png')"
+            >
+        </li>
+
+        <li>
+            <img
+                    src="../../static/images/flask.png"
+                    alt=""
+                    onclick="thumbnailPicker('../../static/images/flask.png')"
+            >
+        </li>
+
+        <li>
+            <img
+                    src="../../static/images/mysql.png"
+                    alt=""
+                    onclick="thumbnailPicker('../../static/images/mysql.png')"
+            >
+        </li>
+    </ul>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='scripts/imagePicker.js') }}"></script>
+{% endblock %}

@@ -7,7 +7,7 @@ from flask import Blueprint, render_template, redirect, url_for, request, sessio
 # Set up the blueprint for the account and its subpages.
 from model.employee import Employee
 
-account = Blueprint('account', __name__, static_folder='static', template_folder='templates')
+account = Blueprint('account', __name__, static_folder='static', template_folder='templates/account')
 
 
 @account.route('/login', methods=['POST', 'GET'])
@@ -37,7 +37,7 @@ def login() -> Response | str:
     if 'email_address' in session:
         return redirect(url_for('account.dashboard'))
 
-    return render_template('login.html', login_message=login_message)
+    return render_template('account/login.html', login_message=login_message)
 
 
 @account.route('/logout')

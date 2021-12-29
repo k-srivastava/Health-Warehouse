@@ -1,0 +1,94 @@
+/* Base stylesheet for all homepages. */
+
+.content
+{
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.text-box
+{
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+}
+
+.text-box h2
+{
+    font-size: 4em;
+    font-weight: 900;
+    line-height: 1.5em;
+    text-transform: uppercase;
+    color: #FFFFFF;
+}
+
+.text-box h2 span
+{
+    font-size: 2em;
+}
+
+.text-box p
+{
+    color: #595758;
+}
+
+.text-box a
+{
+    font-weight: 500;
+    display: inline-block;
+    margin-top: 20px;
+    padding: 8px 20px;
+    text-decoration: none;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #595758;
+    border-radius: 40px;
+    background: #FFFFFF;
+}
+
+.img-box
+{
+    display: flex;
+    justify-content: flex-end;
+    width: 600px;
+    margin-top: 50px;
+    padding-right: 50px;
+}
+
+.img-box img
+{
+    max-height: 400px;
+}
+
+.thumbnail
+{
+    position: absolute;
+    z-index: 1;
+    bottom: 20px;
+    left: 50%;
+    display: flex;
+    transform: translateX(-50%);
+}
+
+.thumbnail li
+{
+    display: inline-block;
+    margin: 0 20px;
+    list-style: none;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.thumbnail li:hover
+{
+    transform: translateY(-15px);
+}
+
+.thumbnail img
+{
+    max-height: 70px;
+}
