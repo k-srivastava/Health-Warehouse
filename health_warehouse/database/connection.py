@@ -1,5 +1,6 @@
 from typing import TYPE_CHECKING, Any
 
+import mysql.connector
 from mysql.connector.connection import MySQLConnection
 
 from . import *
@@ -24,7 +25,7 @@ def connect(host: str = HOST, user: str = USER, password: str = PASSWORD, databa
     :return: Database to which the connection has been established.
     :rtype: MySQLConnection
     """
-    return connector.connect(host=host, user=user, password=password, database=database)
+    return mysql.connector.connect(host=host, user=user, password=password, database=database)
 
 
 def add_to_database(command: str):

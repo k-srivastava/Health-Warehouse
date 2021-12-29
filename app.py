@@ -56,7 +56,7 @@ def details():
     :return: Rendering of the template for 'homepage-project-details.html'.
     :rtype: str
     """
-    return 'Details'
+    return render_template('homepage/details.html')
 
 
 @app.route('/docs')
@@ -85,7 +85,7 @@ def acknowledgement():
     :return: Rendering of the template for 'homepage-acknowledgements.html'.
     :rtype: str
     """
-    return 'Acknowledgements'
+    return render_template('homepage/acknowledgements.html')
 
 
 if __name__ == '__main__':

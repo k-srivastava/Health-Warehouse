@@ -1,6 +1,10 @@
-{% extends "account/base.html" %}
+{% extends "account/_base.html" %}
 
 {% block title %}Login{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/account/login.css') }}">
+{% endblock %}
 
 {% block content %}
     <div class="center">
@@ -13,7 +17,7 @@
             </div>
 
             <div class="text-field">
-                <input type="text" name="password" required>
+                <input type="password" name="password" required>
                 <label>Password</label>
             </div>
 

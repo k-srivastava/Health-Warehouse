@@ -49,6 +49,22 @@ class Employee:
         health_warehouse.database.connection.add_to_database(command)
 
     @staticmethod
+    def get_all() -> list[Employee]:
+        query = f'''
+                SELECT *
+                FROM health_warehouse_db.employees
+            '''
+
+        all_employees: list[Employee] = []
+
+        query_result: list[tuple[Any, ...]] = health_warehouse.database.connection.get_from_database(query)
+
+        for employee_constructor_args in query_result:
+            all_employees.append(Employee(*employee_constructor_args))
+
+        return all_employees
+
+    @staticmethod
     def get_all_ids() -> list[int]:
         query = f'''
                 SELECT id
@@ -58,21 +74,6 @@ class Employee:
         query_result: list[tuple[Any, ...]] = health_warehouse.database.connection.get_from_database(query)
 
         return [int(id_[0]) for id_ in query_result]
-
-    @staticmethod
-    def get_all() -> list[Employee]:
-        query = f'''
-                SELECT *
-                FROM health_warehouse_db.employees
-            '''
-        all_medicines: list[Employee] = []
-
-        query_result: list[tuple[Any, ...]] = health_warehouse.database.connection.get_from_database(query)
-
-        for employee_constructor_args in query_result:
-            all_medicines.append(Employee(*employee_constructor_args))
-
-        return all_medicines
 
     @staticmethod
     def get_by_id(id_: int) -> Employee | None:

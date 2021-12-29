@@ -67,22 +67,12 @@ class Medicine:
         health_warehouse.database.connection.add_to_database(command)
 
     @staticmethod
-    def get_all_ids() -> list[int]:
-        query = f'''
-            SELECT id
-            FROM health_warehouse_db.medicines
-        '''
-
-        query_result: list[tuple[Any, ...]] = health_warehouse.database.connection.get_from_database(query)
-
-        return [int(id_[0]) for id_ in query_result]
-
-    @staticmethod
     def get_all() -> list[Medicine]:
         query = f'''
             SELECT *
             FROM health_warehouse_db.medicines
         '''
+
         all_medicines: list[Medicine] = []
 
         query_result: list[tuple[Any, ...]] = health_warehouse.database.connection.get_from_database(query)
@@ -93,6 +83,16 @@ class Medicine:
         return all_medicines
 
     @staticmethod
+    def get_all_ids() -> list[int]:
+        query = f'''
+            SELECT id
+            FROM health_warehouse_db.medicines
+        '''
+
+        query_result: list[tuple[Any, ...]] = health_warehouse.database.connection.get_from_database(query)
+        return [id_[0] for id_ in query_result]
+
+    @staticmethod
     def get_by_id(id_: int) -> Medicine | None:
         query = f'''
             SELECT *
@@ -101,8 +101,15 @@ class Medicine:
         '''
 
         query_result: list[tuple[Any, ...]] = health_warehouse.database.connection.get_from_database(query)
-
         return Medicine(*query_result[0]) if query_result else None
+
+    @staticmethod
+    def get_quantities_sorted(reverse: bool = False) -> list[Medicine]:
+        return sorted(Medicine.get_all(), key=lambda medicine: medicine.quantity, reverse=reverse)
+
+    @staticmethod
+    def get_stock_sorted(reverse: bool = False) -> list[Medicine]:
+        return sorted(Medicine.get_all(), key=lambda medicine: medicine.stock, reverse=reverse)
 
     @staticmethod
     def generate_random_id() -> int:

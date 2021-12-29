@@ -5,7 +5,7 @@ and help manage sales, profits, stock and other items.
 from flask import Blueprint, render_template, redirect, url_for, request, session, Response
 
 # Set up the blueprint for the account and its subpages.
-from model.employee import Employee
+from models.employee import Employee
 
 account = Blueprint('account', __name__, static_folder='static', template_folder='templates/account')
 
@@ -66,6 +66,7 @@ def dashboard() -> Response | str:
     :rtype: Response | str
     """
     if 'email_address' in session:
-        return render_template('dashboard.html')
+        # return render_template('account/dashboard.html')
+        return 'Dashboard!'
 
     return redirect(url_for('account.login'))
