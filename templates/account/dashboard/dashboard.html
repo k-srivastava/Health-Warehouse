@@ -1,0 +1,71 @@
+{% extends "account/dashboard/base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/account/dashboard/dashboard.css') }}">
+{% endblock %}
+
+{% block content %}
+    <div class="cards">
+        {# First text card. #}
+        {% for card in text_cards[:1] %}
+            <div class="text-card">
+                <div class="content">
+                    <h1>{{ card.display_number }}</h1>
+                    <h2>{{ card.title }}</h2>
+                    <p>{{ card.content }}</p>
+                </div>
+
+                <div class="hidden-content">
+                    <p>{{ card.hidden_content }}</p>
+                    <a href="">{{ card.summary_title }}</a>
+                </div>
+            </div>
+        {% endfor %}
+
+        {# All the data cards. #}
+{#        {% for card in data_cards %}#}
+{#            <div class="data-card">#}
+{#                <div class="content">#}
+{#                    <h1>{{ card.display_number }}</h1>#}
+{#                    <h2>{{ card.title }}</h2>#}
+{##}
+{#                    <div class="data">#}
+{#                        <svg>#}
+{#                            <circle cx="70" cy="70" r="70"></circle>#}
+{#                            <circle cx="70" cy="70" r="70"></circle>#}
+{#                        </svg>#}
+{##}
+{#                        <h3>{{ card.graph_percentage }}<span>%</span></h3>#}
+{#                        <p>{{ card.graph_title }}</p>#}
+{#                    </div>#}
+{#                </div>#}
+{##}
+{#                <div class="hidden-content">#}
+{#                    <p>{{ card.hidden_content }}</p>#}
+{#                </div>#}
+{#            </div>#}
+{#        {% endfor %}#}
+
+        {# Remaining two text cards. #}
+        {% for card in text_cards[1:] %}
+            <div class="text-card">
+                <div class="content">
+                    <h1>{{ card.display_number }}</h1>
+                    <h2>{{ card.title }}</h2>
+                    <p>{{ card.content }}</p>
+                </div>
+
+                <div class="hidden-content">
+                    <p>{{ card.hidden_content }}</p>
+                    <a href="">{{ card.summary_title }}</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='scripts/dashboardPercentToCSS.js') }}"></script>
+{% endblock %}

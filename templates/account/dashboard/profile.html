@@ -1,0 +1,20 @@
+{% extends "account/dashboard/base.html" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/account/dashboard/profile.css') }}">
+{% endblock %}
+
+{% block content %}
+    <div class="employee-card">
+        <div class="content">
+            <h1>{{ employee.designation[:2] }}</h1>
+            <h2>{{ employee.full_name }}</h2>
+            <p>Employee Code: {{ employee.id }}</p>
+            <p>Age: {{ employee.age }}</p>
+            <p>Date of Joining: {{ employee.date_of_joining }}</p>
+            <p>Salary: ₹{{ employee.monthly_salary }}</p>
+        </div>
+    </div>
+{% endblock %}

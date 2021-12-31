@@ -1,0 +1,88 @@
+/* Main stylesheet for the sidebar of all the dashboard pages and its subpages. */
+
+header
+{
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    width: 60px;
+    height: 100%;
+    transition: .4s;
+    background: rgba(50, 50, 50, 0.1);
+    -webkit-backdrop-filter: blur(15px);
+}
+
+header:hover
+{
+    width: 300px;
+}
+
+header ul
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+header ul li:last-child
+{
+    top: 60vh;
+}
+
+header li
+{
+    position: relative;
+    top: 60px;
+    width: 100%;
+    list-style: none;
+}
+
+header li:hover
+{
+    transition: .4s;
+    background: rgba(50, 50, 50, 0.1);
+    -webkit-backdrop-filter: blur(15px);
+}
+
+header li a
+{
+    position: relative;
+    display: flex;
+    width: 100%;
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+header li a .title
+{
+    line-height: 60px;
+    position: relative;
+    display: block;
+    height: 60px;
+    padding: 0 10px;
+    text-align: start;
+    white-space: nowrap;
+}
+
+header li .icon
+{
+    line-height: 60px;
+    position: relative;
+    display: block;
+    min-width: 60px;
+    height: 60px;
+    text-align: center;
+}
+
+header li .icon .fa
+{
+    font-size: 24px;
+}

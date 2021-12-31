@@ -1,0 +1,220 @@
+body
+{
+    display: flex;
+}
+
+.cards
+{
+    position: relative;
+    z-index: 1;
+    top: -5%;
+    left: -5%;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 30px;
+}
+
+.cards h1
+{
+    font-size: 8em;
+    position: absolute;
+    top: -50px;
+    right: 0;
+    pointer-events: none;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.cards h2
+{
+    font-size: 1.8em;
+    position: relative;
+    margin-top: 50px;
+}
+
+.cards p
+{
+    font-size: 1em;
+    font-weight: 400;
+    position: relative;
+    color: #333333;
+}
+
+.text-card,
+.data-card
+{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    margin: 30px 10px;
+    padding: 20px 10px;
+    -webkit-user-select: none;
+    user-select: none;
+    transition: .4s;
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    border-left: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
+    -webkit-backdrop-filter: blur(15px);
+}
+
+.content
+{
+    position: relative;
+    height: 260px;
+    padding: 10px 15px;
+    text-align: center;
+}
+
+.hidden-content
+{
+    position: relative;
+    top: -5%;
+    visibility: hidden;
+    padding: 10px 15px;
+    transition: .4s ease-in-out;
+    text-align: center;
+    opacity: 0;
+}
+
+.text-card:active .hidden-content,
+.data-card:active .hidden-content
+{
+    visibility: visible;
+    opacity: 1;
+}
+
+.hidden-content a
+{
+    font-weight: 500;
+    position: relative;
+    top: 5px;
+    display: inline-block;
+    padding: 8px 20px;
+    text-decoration: none;
+    color: #595758;
+    border-radius: 20px;
+    background: #FFFFFF;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.text-card
+{
+    height: 250px;
+}
+
+.text-card:active
+{
+    max-width: 375px;
+    height: 360px;
+}
+
+.data-card
+{
+    height: 400px;
+}
+
+.data-card .hidden-content p
+{
+    text-align: right;
+}
+
+.data-card:active
+{
+    max-width: 520px;
+}
+
+.data-card:active .data circle
+{
+    transition: .4s;
+    transform: translateX(100px);
+}
+
+.data-card:active .data p
+{
+    transform: translateY(50px);
+}
+
+.data-card:active .hidden-content
+{
+    margin-top: -10px;
+    margin-left: 20px;
+}
+
+.data-card:active .hidden-content p
+{
+    max-width: 50%;
+    transform: translateY(-100px);
+    text-align: left;
+}
+
+.data svg,
+.data h3
+{
+    position: relative;
+    z-index: 2;
+    width: 150px;
+    height: 150px;
+    /*transform: translate(400px, 35px);*/
+}
+
+.data h3
+{
+    font-size: 30px;
+    font-weight: 700;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    /*height: 132%;*/
+    justify-content: center;
+    width: 100%;
+    color: #FFFFFF;
+}
+
+.data h3 span
+{
+    font-size: 18px;
+}
+
+.data p
+{
+    font-weight: 500;
+    position: relative;
+    display: inline-block;
+    margin-top: 20px;
+    padding: 8px 20px;
+    border-radius: 20px;
+    background: #FFFFFF;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+svg
+{
+    position: relative;
+    width: 150px;
+    height: 150px;
+}
+
+svg circle
+{
+    z-index: 3;
+    width: 100%;
+    height: 100%;
+    transform: translate(5px, 5px);
+    fill: none;
+    stroke-width: 10;
+    stroke: rgba(255, 255, 255, 0.1);
+    stroke-linecap: round;
+}
+
+svg circle:nth-child(2)
+{
+    stroke: #FFFFFF;
+    stroke-dasharray: 440px;
+    stroke-dashoffset: 440px;
+}

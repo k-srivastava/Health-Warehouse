@@ -24,6 +24,11 @@ class Card:
     title: str
     hidden_content: str
 
+    @property
+    def display_number(self) -> str:
+        serial_str = str(self.serial_number)
+        return serial_str if len(serial_str) > 1 else f'0{serial_str}'
+
 
 @dataclass
 class TextCard(Card):
@@ -40,7 +45,7 @@ class TextCard(Card):
                 serial_number,
                 title=f'{sale_type.value.title()} Sold',
 
-                content=f'The {sale_type.value} sold medicine _yesterday ({date.today() - timedelta(days=1)}) was '
+                content=f'The {sale_type.value} sold medicine yesterday ({date.today() - timedelta(days=1)}) was '
                         f'{medicine.name} by {medicine.manufacturer}.',
 
                 hidden_content=f'It sold {medicine.quantity} units for a total price of '
@@ -54,7 +59,7 @@ class TextCard(Card):
         return TextCard(
             serial_number,
             title=f'{sale_type.value.title()} Sold',
-            content='No medicine was sold _yesterday.',
+            content='No medicine was sold yesterday.',
             hidden_content='To get information, make a sale.',
             summary_title='No Sale'
         )

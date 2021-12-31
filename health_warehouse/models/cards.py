@@ -23,26 +23,33 @@ _most_stocked_medicine: Medicine = _medicine_stock[-1]
 _num_sales_this_week: int = sum([sale.quantity for sale in _all_sales_this_week])
 _num_sales_last_week: int = sum([sale.quantity for sale in _all_sales_last_week])
 
-# Account for ZeroDivisionError without using bulky try-catches.
-if _num_sales_last_week == 0:
-    _sales_percentage_week_over_week_change = _sales_week_over_week * 100
-else:
-    _sales_percentage_week_over_week_change = round(_sales_week_over_week / _num_sales_last_week) * 100
-
-if _sales_percentage_week_over_week_change > 0:
-    _sales_comparison_card_text1 = f'Sales are up by {_sales_percentage_week_over_week_change}% over last week.'
-    _sales_comparison_card_text2 = f' , an absolute increase of {_sales_week_over_week} units.'
-
-elif _sales_percentage_week_over_week_change < 0:
-    _sales_comparison_card_text1 = f'Sales are down by {-_sales_percentage_week_over_week_change}% over last week.'
-    _sales_comparison_card_text2 = f' , an absolute decrease of {-_sales_week_over_week} units.'
-
-else:
-    _sales_comparison_card_text1 = 'Sales are the same as last week.'
+if _num_sales_last_week == 0 and _num_sales_this_week == 0:
+    _sales_percentage_week_over_week_change = 0
+    _sales_comparison_card_text1 = f'We sold no medicines this week or the last week.'
     _sales_comparison_card_text2 = '.'
 
+elif _num_sales_last_week == 0:
+    _sales_percentage_week_over_week_change = 0
+    _sales_comparison_card_text1 = f'We sold {_num_sales_this_week} medicines this week.'
+    _sales_comparison_card_text2 = 'We sold no medicines last week.'
+
+elif _num_sales_this_week == 0:
+    _sales_percentage_week_over_week_change = 0
+    _sales_comparison_card_text1 = f'We sold {_num_sales_last_week} medicines last week.'
+    _sales_comparison_card_text2 = 'We sold no medicines this week.'
+
+elif _num_sales_this_week > _num_sales_last_week:
+    _sales_percentage_week_over_week_change = round((_num_sales_this_week / _num_sales_last_week) * 100)
+    _sales_comparison_card_text1 = f'We sold {_sales_week_over_week} more medicines this week than last week.'
+    _sales_comparison_card_text2 = f', an increase of {_sales_percentage_week_over_week_change}% over last week.'
+
+else:
+    _sales_percentage_week_over_week_change = round((_num_sales_this_week / _num_sales_last_week) * 100)
+    _sales_comparison_card_text1 = f'We sold {-_sales_week_over_week} less medicines this week than last week.'
+    _sales_comparison_card_text2 = f', a decrease of {_sales_percentage_week_over_week_change}% over last week.'
+
 _most_sold_card = TextCard.sale_card(1, _most_sold_medicine, CardQuantityType.MOST)
-_least_sold_card = TextCard.sale_card(2, _least_sold_medicine, CardQuantityType.LEAST)
+_least_sold_card = TextCard.sale_card(4, _least_sold_medicine, CardQuantityType.LEAST)
 
 _least_stocked_card = TextCard.stock_card(5, _least_stocked_medicine, CardQuantityType.LEAST)
 _most_stocked_card = TextCard.stock_card(6, _most_stocked_medicine, CardQuantityType.MOST)
@@ -52,8 +59,8 @@ _sales_comparison_card = DataCard(
     f'{_sales_comparison_card_text1} We managed to sell {_num_sales_this_week} medicines this week and '
     f'{_num_sales_last_week} medicines last week{_sales_comparison_card_text2}',
     'WoW Increase',
-    _sales_percentage_week_over_week_change
+    int(abs(_sales_percentage_week_over_week_change))
 )
 
 text_cards: list[TextCard] = [_most_sold_card, _least_sold_card, _least_stocked_card, _most_stocked_card]
-data_cards: list[DataCard] = [_sales_comparison_card]
+data_cards: list[DataCard] = [_sales_comparison_card, _sales_comparison_card]

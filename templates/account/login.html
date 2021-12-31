@@ -1,4 +1,4 @@
-{% extends "account/_base.html" %}
+{% extends "account/base.html" %}
 
 {% block title %}Login{% endblock %}
 
@@ -23,8 +23,10 @@
 
             <input type="submit" value="Login">
 
-            <div class="signup-link">
-                {{ login_message }} <a href="#">Signup</a>
+            <div class="links">
+                <a href="/">Go Back</a>
+                <br>
+                {{ login_message }}
             </div>
         </form>
     </div>

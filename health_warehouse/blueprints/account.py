@@ -4,6 +4,7 @@ and help manage sales, profits, stock and other items.
 """
 from flask import Blueprint, render_template, redirect, url_for, request, session, Response
 
+from models.cards import text_cards, data_cards
 # Set up the blueprint for the account and its subpages.
 from models.employee import Employee
 
@@ -66,7 +67,23 @@ def dashboard() -> Response | str:
     :rtype: Response | str
     """
     if 'email_address' in session:
-        # return render_template('account/dashboard.html')
-        return 'Dashboard!'
+        return render_template('account/dashboard/dashboard.html', text_cards=text_cards, data_cards=data_cards)
+
+    return redirect(url_for('account.login'))
+
+
+@account.route('/profile')
+def profile() -> Response | str:
+    if 'email_address' in session:
+        current_employee = Employee.get_by_email_address(session['email_address'])
+        return render_template('account/dashboard/profile.html', employee=current_employee)
+
+    return redirect(url_for('account.login'))
+
+
+@account.route('/warehouse')
+def warehouse() -> Response | str:
+    if 'email_address' in session:
+        return render_template('account/dashboard/warehouse.html')
 
     return redirect(url_for('account.login'))

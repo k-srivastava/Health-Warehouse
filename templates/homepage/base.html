@@ -8,7 +8,9 @@
     <title>{% block title %}{% endblock %}</title>
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/homepage/base.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/homepage/navbar.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
     {% block styles %}
     {% endblock %}
 </head>
@@ -24,6 +26,8 @@
             <li><a href="/details">Details</a></li>
             <li><a href="/docs">Documentation</a></li>
             <li><a href="/acknowledgements">Acknowledgements</a></li>
+            <li><a href=""><span class="icon-clickable" id="icon-theme"><i class="fa fa-moon" aria-hidden="true"></i></span></a>
+            </li>
         </ul>
     </header>
 
@@ -31,6 +35,7 @@
     {% endblock %}
 </section>
 
+<script src="{{ url_for('static', filename='scripts/toggleTheme.js') }}"></script>
 {% block scripts %}
 {% endblock %}
 </body>

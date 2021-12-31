@@ -39,5 +39,20 @@ header li a
     display: inline-block;
     margin-left: 40px;
     text-decoration: none;
-    color: #595758;
+    color: var(--navbar-text-color);
+}
+
+header li a .icon-theme
+{
+    font-size: 16px;
+}
+
+.light
+{
+    --navbar-text-color: #595758;
+}
+
+.dark
+{
+    --navbar-text-color: #EDEDED;
 }
