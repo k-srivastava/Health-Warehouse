@@ -1,0 +1,77 @@
+{% extends "account/dashboard/base.html" %}
+
+{% block title %}Warehouse{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/account/dashboard/warehouse/warehouse.css') }}">
+{% endblock %}
+
+{% block content %}
+    <div class="warehouse-data">
+        <div class="data-table">
+            <h1>Medicine Details</h1>
+
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Manufacturer</th>
+                    <th>Cost Price</th>
+                    <th>Sale Price</th>
+                    <th>Potency</th>
+                    <th>Quantity</th>
+                    <th>M. Date</th>
+                    <th>P. Date</th>
+                    <th>E. Date</th>
+                    <th>Salts</th>
+                    <th>Stock</th>
+                </tr>
+
+                {% for medicine in medicines %}
+                    <tr>
+                        <td>{{ medicine.id }}</td>
+                        <td>{{ medicine.name }}</td>
+                        <td>{{ medicine.manufacturer }}</td>
+                        <td>{{ medicine.cost_price }}</td>
+                        <td>{{ medicine.sale_price }}</td>
+                        <td>{{ medicine.potency }}</td>
+                        <td>{{ medicine.quantity }}</td>
+                        <td class="dates">{{ medicine.manufacturing_date }}</td>
+                        <td class="dates">{{ medicine.purchase_date }}</td>
+                        <td class="dates">{{ medicine.expiry_date }}</td>
+                        <td>{{ medicine.salts }}</td>
+                        <td>{{ medicine.stock }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+
+            <a href="">Add Medicine</a>
+            <br>
+            <a href="">Update Stock</a>
+        </div>
+
+        <div class="data-table">
+            <h1>Sales</h1>
+
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Date</th>
+                    <th>Medicine ID</th>
+                    <th>Quantity</th>
+                </tr>
+
+                {% for sale in sales %}
+                    <tr>
+                        <td>{{ sale.id }}</td>
+                        <td class="dates">{{ sale.date }}</td>
+                        <td>{{ sale.medicine_id }}</td>
+                        <td>{{ sale.quantity }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+
+            <a href="">New Sale</a>
+        </div>
+    </div>
+{% endblock %}

@@ -5,9 +5,11 @@ and help manage sales, profits, stock and other items.
 from flask import Blueprint, render_template, redirect, url_for, request, session, Response
 
 from models.cards import text_cards, data_cards
-# Set up the blueprint for the account and its subpages.
 from models.employee import Employee
+from models.medicine import Medicine
+from models.sale import Sale
 
+# Set up the blueprint for the account and its subpages.
 account = Blueprint('account', __name__, static_folder='static', template_folder='templates/account')
 
 
@@ -84,6 +86,6 @@ def profile() -> Response | str:
 @account.route('/warehouse')
 def warehouse() -> Response | str:
     if 'email_address' in session:
-        return render_template('account/dashboard/warehouse.html')
+        return render_template('account/dashboard/warehouse/warehouse.html', medicines=Medicine.get_all(), sales=Sale.get_all()[-10:])
 
     return redirect(url_for('account.login'))
