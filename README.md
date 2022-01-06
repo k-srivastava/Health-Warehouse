@@ -41,17 +41,17 @@ build either due to time or complexity reasons but, if implemented, will be as p
 
 ### Python
 
-I shall be using the latest version of Python (which, at the time of writing is 3.9.5) in a virtual environment for easy
-deployment without having to first install Python on another system. I will also split the code into multiple files to
-make the code more readable the easy to work with along with some basic object-oriented programming concepts to make the
-development of the program as easy and fun as possible.
+I shall be using Python 3.10 in a virtual environment for easy deployment without having to first install Python on
+another system. I will also split the code into multiple files to make the code more readable the easy to work with
+along with some basic object-oriented programming concepts to make the development of the program as easy and fun as
+possible.
 
 The following libraries will bse used with Python:
 
 - ### Flask
     - Flask is a light and powerful Python framework to create basic websites using Python and HTML. This should make
       the project easy to maintain and making changes to the code quick and easy. It also makes it very easy to host
-      this project on a custom domain at a future date. The version of Flask being used for the project is 2.0.0.
+      this project on a custom domain at a future date. The version of Flask being used for the project is 2.0.2.
 
 - ### MySQL Connector
     - MySQL connector is a Python library that allows for easy connection to a local MySQL database used for storing all
