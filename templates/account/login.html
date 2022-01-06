@@ -4,6 +4,7 @@
 
 {% block styles %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/account/login.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
 {% endblock %}
 
 {% block content %}
@@ -29,5 +30,9 @@
                 {{ login_message }}
             </div>
         </form>
+    </div>
+
+    <div class="toggle-mode">
+        <a href=""><span class="icon-clickable" id="icon-theme"><i class="fa fa-moon" aria-hidden="true"></i></span></a>
     </div>
 {% endblock %}

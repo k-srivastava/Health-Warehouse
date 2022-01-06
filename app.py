@@ -1,5 +1,5 @@
 """
-Main Python file from which the Flask app is to be run. The app is hosted on localhost, port 5000.
+Main Python file from which the Flask app is to be run. The app is hosted on localhost, port 3000.
 """
 from datetime import timedelta
 

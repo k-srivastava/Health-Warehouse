@@ -86,6 +86,31 @@ def profile() -> Response | str:
 @account.route('/warehouse')
 def warehouse() -> Response | str:
     if 'email_address' in session:
-        return render_template('account/dashboard/warehouse/warehouse.html', medicines=Medicine.get_all(), sales=Sale.get_all()[-10:])
+        return render_template('account/dashboard/warehouse/warehouse.html', medicines=Medicine.get_all(),
+                               sales=Sale.get_all()[-10:])
+
+    return redirect(url_for('account.login'))
+
+
+@account.route('/warehouse/add-medicine', methods=['POST', 'GET'])
+def warehouse_add_medicine() -> Response | str:
+    if 'email_address' in session:
+        return render_template('account/dashboard/warehouse/add_medicine.html', new_id=Medicine.generate_random_id())
+
+    return redirect(url_for('account.login'))
+
+
+@account.route('/warehouse/update-stock', methods=['POST', 'GET'])
+def warehouse_update_stock() -> Response | str:
+    if 'email_address' in session:
+        return render_template('account/dashboard/warehouse/update_stock.html')
+
+    return redirect(url_for('account.login'))
+
+
+@account.route('/warehouse/new-sale', methods=['POST', 'GET'])
+def warehouse_new_sale() -> Response | str:
+    if 'email_address' in session:
+        return render_template('account/dashboard/warehouse/new_sale.html')
 
     return redirect(url_for('account.login'))

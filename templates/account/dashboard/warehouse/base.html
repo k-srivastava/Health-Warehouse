@@ -1,0 +1,27 @@
+{% extends "account/dashboard/base.html" %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/account/dashboard/warehouse/base.css') }}">
+{% endblock %}
+
+{% block content %}
+    <div class="form-container">
+        <div class="center">
+            <h1>{% block title %}{% endblock %}</h1>
+
+            <form method="post">
+                {% block select_field %}
+                {% endblock %}
+
+                {% block fields %}
+                {% endblock %}
+
+                <input type="submit" value="{% block submit_title %}{% endblock %}">
+
+                <div class="submission-message">
+                    {{ submission_message }}
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

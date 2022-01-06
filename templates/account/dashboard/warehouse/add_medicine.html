@@ -1,0 +1,65 @@
+{% extends "account/dashboard/warehouse/base.html" %}
+
+{% block title %}Add Medicine{% endblock %}
+
+{% block fields %}
+    <div class="field" id="readonly-field">
+        <input type="number" name="id" value="{{ new_id }}" readonly>
+        <label>Medicine ID</label>
+    </div>
+
+    <div class="field">
+        <input type="text" name="name" required>
+        <label>Name</label>
+    </div>
+
+    <div class="field">
+        <input type="text" name="manufacturer" required>
+        <label>Manufacturer</label>
+    </div>
+
+    <div class="field">
+        <input type="number" name="cost_price" required>
+        <label>Cost Price</label>
+    </div>
+
+    <div class="field">
+        <input type="number" name="sale_price" required>
+        <label>Sale Price</label>
+    </div>
+
+    <div class="field">
+        <input type="number" name="potency" required>
+        <label>Potency</label>
+    </div>
+
+    <div class="field">
+        <input type="number" name="quantity" required>
+        <label>Quantity</label>
+    </div>
+
+    <div class="field" id="date-field">
+        <input type="date" name="manufacturing_date" required>
+        <label>Manufacturing Date</label>
+    </div>
+
+    <div class="field" id="date-field">
+        <input type="date" name="purchase_date" required>
+        <label>Purchase Date</label>
+    </div>
+
+    <div class="field" id="date-field">
+        <input type="date" name="expiry_date" required>
+        <label>Expiry Date</label>
+    </div>
+
+    <div class="field">
+        <input type="text" name="salts" required>
+        <label>Salts</label>
+    </div>
+
+    <div class="field">
+        <input type="number" name="stock" required>
+        <label>Stock</label>
+    </div>
+{% endblock %}

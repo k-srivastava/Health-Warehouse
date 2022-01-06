@@ -68,7 +68,7 @@ section::after
 
 .dark
 {
-    --background-color: #161623;
+    --background-color: linear-gradient(120deg, #160A2B, #161623);
     --circle-before-color: linear-gradient(#FF0000, #FF00FF);
     --circle-after-color: linear-gradient(#2196F3, #E91E63);
 }
