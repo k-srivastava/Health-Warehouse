@@ -61,8 +61,7 @@ def logout() -> Response:
 @account.route('/dashboard')
 def dashboard() -> Response | str:
     """
-    Dashboard page where major / important information is displayed as cards. The cards can be clicked to redirect to a
-    detailed information page.
+    Dashboard page where major / important information is displayed as cards.
 
     :return: If the user is logged in, rendering of the template for 'dashboard.html' else, a redirect to the login
              page.
@@ -76,6 +75,13 @@ def dashboard() -> Response | str:
 
 @account.route('/profile')
 def profile() -> Response | str:
+    """
+    Profile page where employee information is displayed.
+
+    :return: If the user is logged in, rendering of the template for 'dashboard.html' else, a redirect to the login
+             page.
+    :rtype: Response | str
+    """
     if 'email_address' in session:
         current_employee = Employee.get_by_email_address(session['email_address'])
         return render_template('account/dashboard/profile.html', employee=current_employee)
@@ -85,6 +91,13 @@ def profile() -> Response | str:
 
 @account.route('/warehouse')
 def warehouse() -> Response | str:
+    """
+    Warehouse page where data related to medicines stored, their stock and sales made is shown as tables.
+
+    :return: If the user is logged in, rendering of the template for 'dashboard.html' else, a redirect to the login
+             page.
+    :rtype: Response | str
+    """
     if 'email_address' in session:
         return render_template('account/dashboard/warehouse/warehouse.html', medicines=Medicine.get_all(),
                                sales=Sale.get_all()[-10:])
@@ -94,6 +107,13 @@ def warehouse() -> Response | str:
 
 @account.route('/warehouse/add-medicine', methods=['POST', 'GET'])
 def warehouse_add_medicine() -> Response | str:
+    """
+    Add medicine page where new medicines for the database can be added using a form.
+
+    :return: If the user is logged in, rendering of the template for 'dashboard.html' else, a redirect to the login
+             page.
+    :rtype: Response | str
+    """
     if 'email_address' in session:
         return render_template('account/dashboard/warehouse/add_medicine.html', new_id=Medicine.generate_random_id())
 
@@ -102,6 +122,13 @@ def warehouse_add_medicine() -> Response | str:
 
 @account.route('/warehouse/update-stock', methods=['POST', 'GET'])
 def warehouse_update_stock() -> Response | str:
+    """
+    Update stock page where stock of existing medicines can be updated using a form.
+
+    :return: If the user is logged in, rendering of the template for 'dashboard.html' else, a redirect to the login
+             page.
+    :rtype: Response | str
+    """
     if 'email_address' in session:
         return render_template('account/dashboard/warehouse/update_stock.html')
 
@@ -110,6 +137,13 @@ def warehouse_update_stock() -> Response | str:
 
 @account.route('/warehouse/new-sale', methods=['POST', 'GET'])
 def warehouse_new_sale() -> Response | str:
+    """
+    New sale page where new sales can be logged using a form.
+
+    :return: If the user is logged in, rendering of the template for 'dashboard.html' else, a redirect to the login
+             page.
+    :rtype: Response | str
+    """
     if 'email_address' in session:
         return render_template('account/dashboard/warehouse/new_sale.html')
 

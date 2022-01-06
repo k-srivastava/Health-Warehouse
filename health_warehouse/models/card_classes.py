@@ -1,3 +1,6 @@
+"""
+File to create the base information card class.
+"""
 from __future__ import annotations
 
 from dataclasses import dataclass, field
@@ -8,11 +11,18 @@ from .medicine import Medicine
 
 
 class CardType(Enum):
+    """
+    Enum specifying whether the card is a text card or data card.
+    """
     TEXT = auto()
     DATA = auto()
 
 
 class CardQuantityType(Enum):
+    """
+    Enum specifying whether the quantity the card talks about is "most" or "least". Useful to create custom card
+    descriptions easily.
+    """
     MOST = 'most'
     LEAST = 'least'
 
@@ -26,6 +36,13 @@ class Card:
 
     @property
     def display_number(self) -> str:
+        """
+        Property that modifies the cards serial number to have a leading zero if the number is a single digit to make
+        it more presentable in a larger font.
+
+        :return: Display number of the card, modified with the required leading zeroes.
+        :rtype: str
+        """
         serial_str = str(self.serial_number)
         return serial_str if len(serial_str) > 1 else f'0{serial_str}'
 
@@ -36,10 +53,26 @@ class TextCard(Card):
     summary_title: str
 
     def __post_init__(self):
+        """
+        Automatically set the type of the card to a text card after the class is initialised.
+        """
         self.type = CardType.TEXT
 
     @staticmethod
     def sale_card(serial_number: int, medicine: Medicine | None, sale_type: CardQuantityType) -> TextCard:
+        """
+        Create a new sale related text card using a fixed template to avoid having to write the card information every
+        time.
+
+        :param serial_number: Serial number of the card.
+        :type serial_number: int
+        :param medicine: Medicine which the card is talking about, or None.
+        :type medicine: Medicine | None
+        :param sale_type: Whether the sale of the medicine was the most or the least out of all.
+        :type sale_type: CardQuantityType
+        :return: Customised text card about the medicine sale if the medicine is given else, a default blank card.
+        :rtype: TextCard
+        """
         if medicine is not None:
             return TextCard(
                 serial_number,
@@ -66,6 +99,19 @@ class TextCard(Card):
 
     @staticmethod
     def stock_card(serial_number: int, medicine: Medicine, stock_type: CardQuantityType) -> TextCard:
+        """
+        Create a new stock related text card using a fixed template to avoid having to write the card information every
+        time.
+
+        :param serial_number: Serial number of the card.
+        :type serial_number: int
+        :param medicine: Medicine which the card is talking about.
+        :type medicine: Medicine | None
+        :param stock_type: Whether the sale of the medicine was the most or the least out of all.
+        :type stock_type: CardQuantityType
+        :return: Customised text card about the medicine stock.
+        :rtype: TextCard
+        """
         least_stock = stock_type == CardQuantityType.LEAST
 
         return TextCard(
@@ -89,4 +135,7 @@ class DataCard(Card):
     graph_percentage: int
 
     def __post_init__(self):
+        """
+        Automatically set the type of the card to a data card after the class is initialised.
+        """
         self.type = CardType.DATA

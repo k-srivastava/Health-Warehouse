@@ -1,5 +1,5 @@
 """
-Main products class file. Generate all the database models for the items in the MySQL database.
+Main medicine file. Generate all the database models for the medicines in the MySQL database.
 """
 from __future__ import annotations
 
@@ -34,6 +34,9 @@ class Medicine:
     stock: int = 0
 
     def __post_init__(self):
+        """
+        Assign a new unique random ID for the medicine if not provided in the constructor.
+        """
         if self.id is None:
             self.id = Medicine.generate_random_id()
 
@@ -59,6 +62,9 @@ class Medicine:
         return salts_as_string
 
     def add_to_database(self):
+        """
+        Add the medicine data to the database using a MySQL command.
+        """
         command = f'''
             INSERT INTO health_warehouse_db.medicines
             VALUES ({self.id}, '{self.name}', '{self.manufacturer}', {self.cost_price}, {self.sale_price}, {self.potency}, {self.quantity}, '{self.manufacturing_date}', '{self.purchase_date}', '{self.expiry_date}', '{self._salts_str()}', {self.stock})
@@ -68,6 +74,12 @@ class Medicine:
 
     @staticmethod
     def get_all() -> list[Medicine]:
+        """
+        Get all the medicines from the database using a MySQL query.
+
+        :return: List of all the medicines in the database.
+        :rtype: list[Medicine]
+        """
         query = f'''
             SELECT *
             FROM health_warehouse_db.medicines
@@ -84,6 +96,12 @@ class Medicine:
 
     @staticmethod
     def get_all_ids() -> list[int]:
+        """
+        Get all the medicine IDs from the database using a MySQL query.
+
+        :return: List of all the medicine IDs in the database.
+        :rtype: list[int]
+        """
         query = f'''
             SELECT id
             FROM health_warehouse_db.medicines
@@ -94,6 +112,14 @@ class Medicine:
 
     @staticmethod
     def get_by_id(id_: int) -> Medicine | None:
+        """
+        Retrieve a specific medicine from the database using a MySQL query with the medicine's ID as primary key.
+
+        :param id_: Medicine ID for the specific medicine, primary key.
+        :type id_: int
+        :return: Medicine data if a medicine with the given ID exists in the database else None.
+        :rtype: Medicine | None
+        """
         query = f'''
             SELECT *
             FROM health_warehouse_db.medicines
@@ -105,14 +131,37 @@ class Medicine:
 
     @staticmethod
     def get_quantities_sorted(reverse: bool = False) -> list[Medicine]:
-        return sorted(Medicine.get_all(), key=lambda medicine: medicine.quantity, reverse=reverse)
+        """
+        Retrieve all of the medicines from the database using a MySQL query and sort them on the basis of their
+        quantities.
+
+        :param reverse: Reverse the order of the sorting, defaults to False.
+        :type reverse: bool
+        :return: List of all medicines sorted by their quantities.
+        :rtype: list[Medicine]
+        """
+        return list(sorted(Medicine.get_all(), key=lambda medicine: medicine.quantity, reverse=reverse))
 
     @staticmethod
     def get_stock_sorted(reverse: bool = False) -> list[Medicine]:
-        return sorted(Medicine.get_all(), key=lambda medicine: medicine.stock, reverse=reverse)
+        """
+        Retrieve all of the medicines from the database using a MySQL query and sort them on the basis of their stocks.
+
+        :param reverse: Reverse the order of the sorting, defaults to False.
+        :type reverse: bool
+        :return: List of all medicines sorted by their stocks.
+        :rtype: list[Medicine]
+        """
+        return list(sorted(Medicine.get_all(), key=lambda medicine: medicine.stock, reverse=reverse))
 
     @staticmethod
     def generate_random_id() -> int:
+        """
+        Generate a new unique random ID for a new medicine.
+
+        :return: New random, unique medicine ID.
+        :rtype: int
+        """
         all_ids = Medicine.get_all_ids()
 
         while True:

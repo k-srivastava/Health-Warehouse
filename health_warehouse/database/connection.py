@@ -1,3 +1,6 @@
+"""
+File to manage all connections and queries made to the MySQL database.
+"""
 from typing import TYPE_CHECKING, Any
 
 import mysql.connector
@@ -29,6 +32,13 @@ def connect(host: str = HOST, user: str = USER, password: str = PASSWORD, databa
 
 
 def add_to_database(command: str):
+    """
+    Run a MySQL command on the database to add new data to it. Commits and closes the database after the operation
+    is complete.
+
+    :param command: MySQL command to be run on the database.
+    :type command: str
+    """
     health_warehouse_database = connect()
     cursor: 'MySQLCursor' = health_warehouse_database.cursor()
 
@@ -39,6 +49,15 @@ def add_to_database(command: str):
 
 
 def get_from_database(query: str) -> list[tuple[Any, ...]]:
+    """
+    Run a MySQL query on the database and retrieve all results from it. Closes the database after the operation is
+    complete.
+
+    :param query: MySQL query to be run on the database.
+    :type query: str
+    :return: Results of the query from the database. If only one result is retrieved, return type is a singleton list.
+    :rtype: list[tuple[Any, ...]]
+    """
     health_warehouse_database = connect()
     cursor: 'MySQLCursor' = health_warehouse_database.cursor()
 

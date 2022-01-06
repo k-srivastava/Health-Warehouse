@@ -1,5 +1,5 @@
 """
-Main products class file. Generate all the database models for the items in the MySQL database.
+Main employee file. Generate all the database models for the employees in the MySQL database.
 """
 from __future__ import annotations
 
@@ -29,18 +29,32 @@ class Employee:
     password: str
 
     def __post_init__(self):
+        """
+        Generate a random unique employee ID and assign the gender to be the first letter, capitalised after the class
+        is initialised.
+        """
         if self.id is None:
             self.id = Employee.generate_random_id()
 
-        self.gender = self.gender.title()
+        self.gender = self.gender[0].title()
 
     @property
     def full_name(self) -> str:
+        """
+        Property that sets the full name of the employee as a formatted string to make it more readable when it is
+        very long, for instance.
+
+        :return: Full name of the employee, truncated to the first 17 characters.
+        :rtype: str
+        """
         full_name_ = f'{self.first_name} {self.last_name}'
 
         return f'{full_name_[:17]}...' if len(full_name_) >= 20 else full_name_
 
     def add_to_database(self):
+        """
+        Add the employee data to the database using a MySQL command.
+        """
         command = f'''
             INSERT INTO health_warehouse_db.employees
             VALUES ({self.id}, '{self.first_name}', '{self.last_name}', '{self.email_address}', {self.age}, '{self.gender}', '{self.date_of_joining}', '{self.designation}', {self.monthly_salary}, '{self.home_address}', '{self.password}')
@@ -50,6 +64,12 @@ class Employee:
 
     @staticmethod
     def get_all() -> list[Employee]:
+        """
+        Get all the employees from the database using a MySQL query.
+
+        :return: List of all the employees in the database.
+        :rtype: list[Employee]
+        """
         query = f'''
                 SELECT *
                 FROM health_warehouse_db.employees
@@ -66,6 +86,12 @@ class Employee:
 
     @staticmethod
     def get_all_ids() -> list[int]:
+        """
+        Get all the employee IDs from the database using a MySQL query.
+
+        :return: List of all the employee IDs in the database.
+        :rtype: list[int]
+        """
         query = f'''
                 SELECT id
                 FROM health_warehouse_db.employees
@@ -77,6 +103,14 @@ class Employee:
 
     @staticmethod
     def get_by_id(id_: int) -> Employee | None:
+        """
+        Retrieve a specific employee from the database using a MySQL query with the employee's ID as primary key.
+
+        :param id_: Employee ID for the specific employee, primary key.
+        :type id_: int
+        :return: Employee data if an employee with the given ID exists in the database else None.
+        :rtype: Employee | None
+        """
         query = f'''
                 SELECT *
                 FROM health_warehouse_db.employees
@@ -89,6 +123,15 @@ class Employee:
 
     @staticmethod
     def get_by_email_address(email_address: str) -> Employee | None:
+        """
+        Retrieve a specific employee from the database using a MySQL query with the employee's email address which
+        should be unique, although, it is not the primary key. Used when authenticating the employee during login.
+
+        :param email_address: Email address of the specific employee.
+        :type email_address: str
+        :return: Employee data if an employee with the given email address exists in the database else None.
+        :rtype: Employee | None
+        """
         query = f'''
             SELECT *
             FROM health_warehouse_db.employees
@@ -101,6 +144,12 @@ class Employee:
 
     @staticmethod
     def generate_random_id() -> int:
+        """
+        Generate a new unique random ID for a new employee.
+
+        :return: New random, unique employee ID.
+        :rtype: int
+        """
         all_ids = Employee.get_all_ids()
 
         while True:
