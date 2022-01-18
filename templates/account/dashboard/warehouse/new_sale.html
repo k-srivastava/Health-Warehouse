@@ -1,10 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h1>New Sale</h1>
-</body>
-</html>
+{% extends "account/dashboard/warehouse/base.html" %}
+
+{% block title %}New Sale{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/account/dashboard/warehouse/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/account/dashboard/warehouse/update_stock.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/account/dashboard/warehouse/new_sale.css') }}">
+{% endblock %}
+
+{% block select_field %}
+    <div class="select-field">
+        <label>Medicine ID</label>
+        <select name="medicine-id" id="medicine-id" onchange="updateFields()">
+            {% for medicine in all_medicines %}
+                <option name="medicine-id" value="{{ medicine.id }}">{{ medicine.id }}</option>
+            {% endfor %}
+        </select>
+    </div>
+{% endblock %}
+
+{% block fields %}
+    <div class="field" id="readonly-field">
+        <input type="number" name="sale-id" value="{{ new_id }}" readonly>
+        <label>Sale ID</label>
+    </div>
+
+    <div class="field" id="readonly-field">
+        <input type="text" name="name" readonly>
+        <label>Name</label>
+    </div>
+
+    <div class="field">
+        <input type="number" name="quantity" required>
+        <label>Quantity</label>
+    </div>
+
+    <div class="field" id="date-field">
+        <input type="date" name="sale_date" required>
+        <label>Sale Date</label>
+    </div>
+{% endblock %}
+
+{% block submit_title %}New Sale{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='scripts/currentMedicine.js') }}"></script>
+
+    <script>
+        const medicineData = JSON.parse({{ medicines_json|tojson }})
+        const medicineNameField = document.getElementsByName('name')[0]
+
+        let currentMedicine;
+
+        function updateFields() {
+            currentMedicine = getCurrentMedicine(medicineData);
+            medicineNameField.value = currentMedicine.name;
+        }
+    </script>s
+{% endblock %}

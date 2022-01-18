@@ -2,6 +2,11 @@
 
 {% block title %}Add Medicine{% endblock %}
 
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/account/dashboard/warehouse/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/account/dashboard/warehouse/add_medicine.css') }}">
+{% endblock %}
+
 {% block fields %}
     <div class="field" id="readonly-field">
         <input type="number" name="id" value="{{ new_id }}" readonly>
@@ -63,3 +68,5 @@
         <label>Stock</label>
     </div>
 {% endblock %}
+
+{% block submit_title %}Add Medicine{% endblock %}

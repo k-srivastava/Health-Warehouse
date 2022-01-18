@@ -1,10 +1,67 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h1>Update Stock</h1>
-</body>
-</html>
+{% extends "account/dashboard/warehouse/base.html" %}
+
+{% block title %}Update Stock{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/account/dashboard/warehouse/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/account/dashboard/warehouse/update_stock.css') }}">
+{% endblock %}
+
+{% block select_field %}
+    <div class="select-field">
+        <label>Medicine ID</label>
+        <select name="id" id="medicine-id" onchange="updateFields()">
+            {% for medicine in all_medicines %}
+                <option value="{{ medicine.id }}">{{ medicine.id }}</option>
+            {% endfor %}
+        </select>
+    </div>
+{% endblock %}
+
+{% block fields %}
+    <div class="field" id="readonly-field">
+        <input type="text" name="name" readonly>
+        <label>Name</label>
+    </div>
+
+    <div class="field" id="readonly-field">
+        <input type="text" name="manufacturer" readonly>
+        <label>Manufacturer</label>
+    </div>
+
+    <div class="field" id="readonly-field">
+        <input type="number" name="current_stock" readonly>
+        <label>Current Stock</label>
+    </div>
+
+    <div class="field">
+        <input type="number" name="new_stock" required>
+        <label>New Stock</label>
+    </div>
+{% endblock %}
+
+{% block submit_title %}Update Stock{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='scripts/currentMedicine.js') }}"></script>
+
+    <script>
+        const medicineData = JSON.parse({{ medicines_json|tojson }})
+        const medicineNameField = document.getElementsByName('name')[0];
+        const medicineManufacturerField = document.getElementsByName('manufacturer')[0];
+        const medicineCurrentStockField = document.getElementsByName('current_stock')[0];
+        const medicineNewStockField = document.getElementsByName('new_stock')[0];
+
+        let currentMedicine;
+
+        function updateFields() {
+            currentMedicine = getCurrentMedicine(medicineData);
+            
+            medicineNameField.value = currentMedicine.name;
+            medicineManufacturerField.value = currentMedicine.manufacturer;
+            medicineCurrentStockField.value = currentMedicine.stock;
+        }
+
+        currentMedicine = getCurrentMedicine(medicineData);
+    </script>
+{% endblock %}

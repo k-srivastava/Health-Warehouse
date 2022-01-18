@@ -2,7 +2,10 @@
 File to manage the account page and its respective subpages. These pages contain general information about the store
 and help manage sales, profits, stock and other items.
 """
+import datetime
+
 from flask import Blueprint, render_template, redirect, url_for, request, session, Response
+from werkzeug.datastructures import ImmutableMultiDict
 
 from models.cards import text_cards, data_cards
 from models.employee import Employee
@@ -114,6 +117,30 @@ def warehouse_add_medicine() -> Response | str:
              page.
     :rtype: Response | str
     """
+    if request.method == 'POST':
+        form_output: list[int | str | tuple[str, ...]] = list(dict(request.form).values())
+
+        # Convert all the numerical data into int() types.
+        for idx, form_item in enumerate(form_output):
+            try:
+                form_output[idx] = int(form_item)
+
+            except ValueError:
+                pass
+
+        # Reformatting output for medicine salts; converting into a tuple.
+        form_output[-2] = tuple([salt.strip() for salt in form_output[-2].split(',')])
+
+        new_medicine = Medicine(*form_output)
+        new_medicine.add_to_database()
+
+        submission_message = 'Medicine added to database.'
+
+        return render_template(
+            'account/dashboard/warehouse/add_medicine.html',
+            new_id=Medicine.generate_random_id(), submission_message=submission_message
+        )
+
     if 'email_address' in session:
         return render_template('account/dashboard/warehouse/add_medicine.html', new_id=Medicine.generate_random_id())
 
@@ -129,8 +156,23 @@ def warehouse_update_stock() -> Response | str:
              page.
     :rtype: Response | str
     """
+    if request.method == 'POST':
+        form_output: ImmutableMultiDict[str, str] = request.form
+        Medicine.update_in_database(int(form_output['id']), 'stock', int(form_output['new_stock']))
+
+        submission_message = 'Updated medicine stock.'
+
+        return render_template(
+            'account/dashboard/warehouse/update_stock.html',
+            all_medicines=Medicine.get_all(), medicines_json=Medicine.get_as_json(),
+            submission_message=submission_message
+        )
+
     if 'email_address' in session:
-        return render_template('account/dashboard/warehouse/update_stock.html')
+        return render_template(
+            'account/dashboard/warehouse/update_stock.html',
+            all_medicines=Medicine.get_all(), medicines_json=Medicine.get_as_json()
+        )
 
     return redirect(url_for('account.login'))
 
@@ -144,7 +186,24 @@ def warehouse_new_sale() -> Response | str:
              page.
     :rtype: Response | str
     """
+    if request.method == 'POST':
+        form_output: ImmutableMultiDict[str, str] = request.form
+
+        new_sale = Sale(
+            int(form_output['sale-id']), datetime.date.fromisoformat(form_output['sale_date']),
+            int(form_output['medicine-id']), int(form_output['quantity'])
+        )
+        medicine_sold = Medicine.get_by_id(new_sale.medicine_id)
+
+        Medicine.update_in_database(medicine_sold.id, 'stock', medicine_sold.stock - new_sale.quantity)
+        new_sale.add_to_database()
+
     if 'email_address' in session:
-        return render_template('account/dashboard/warehouse/new_sale.html')
+        return render_template(
+            'account/dashboard/warehouse/new_sale.html',
+            new_id=Sale.generate_random_id(),
+            all_medicines=Medicine.get_all(),
+            medicines_json=Medicine.get_as_json()
+        )
 
     return redirect(url_for('account.login'))

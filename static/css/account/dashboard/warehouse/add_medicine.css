@@ -1,0 +1,17 @@
+body
+{
+    overflow: scroll;
+}
+
+#readonly-field input
+{
+    left: 85%;
+}
+
+#readonly-field input:focus ~ label,
+#readonly-field input:valid ~ label
+{
+    /* Override the moving up of the input field as defined in "base.css" for warehouse. */
+    /* Not the best solution. */
+    top: 20px;
+}

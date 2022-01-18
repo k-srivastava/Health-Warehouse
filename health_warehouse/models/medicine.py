@@ -67,7 +67,36 @@ class Medicine:
         """
         command = f'''
             INSERT INTO health_warehouse_db.medicines
-            VALUES ({self.id}, '{self.name}', '{self.manufacturer}', {self.cost_price}, {self.sale_price}, {self.potency}, {self.quantity}, '{self.manufacturing_date}', '{self.purchase_date}', '{self.expiry_date}', '{self._salts_str()}', {self.stock})
+            VALUES (
+                {self.id},
+                '{self.name}',
+                '{self.manufacturer}',
+                {self.cost_price},
+                {self.sale_price},
+                {self.potency},
+                {self.quantity},
+                '{self.manufacturing_date}',
+                '{self.purchase_date}',
+                '{self.expiry_date}',
+                '{self._salts_str()}',
+                {self.stock}
+            )
+        '''
+
+        health_warehouse.database.connection.add_to_database(command)
+
+    @staticmethod
+    def update_in_database(medicine_id: int, field_name: str, new_value: Any):
+        """
+        Update a particular piece of medicine data in the database with updated data using a MySQL command.
+        """
+        formatter = "'" if type(new_value) is str else ''
+
+        command = f'''
+            UPDATE health_warehouse_db.medicines
+            SET
+                {field_name} = {formatter}{new_value}{formatter}
+            WHERE id = {medicine_id}
         '''
 
         health_warehouse.database.connection.add_to_database(command)
@@ -93,6 +122,27 @@ class Medicine:
             all_medicines.append(Medicine(*medicine_constructor_args))
 
         return all_medicines
+
+    @staticmethod
+    def get_as_json() -> str:
+        """
+        Get all the medicines from the database using a MySQL query and parse their id, name, manufacturer and stock
+        as JSON. Useful to transfer medicine data from Python to JavaScript.
+
+        :return: Medicine data as JSON.
+        :rtype: str
+        """
+        medicines = Medicine.get_all()
+        json = '['
+
+        for medicine in medicines:
+            json += f'{{"id": {medicine.id}, "name": "{medicine.name}", "manufacturer": "{medicine.manufacturer}", ' \
+                    f'"stock": {medicine.stock}}},'
+
+        json = json[:-1]  # remove the last trailing comma
+        json += ']'
+
+        return json
 
     @staticmethod
     def get_all_ids() -> list[int]:

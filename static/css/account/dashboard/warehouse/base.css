@@ -1,9 +1,11 @@
 /* Main stylesheet for the warehouse pages. */
-
 .form-container
 {
+    position: relative;
     z-index: 1;
+    left: 50%;
     padding: 30px;
+    transform: translateX(-50%);
 }
 
 .center
@@ -14,7 +16,6 @@
     border-top: 1px solid rgba(255, 255, 255, 0.5);
     border-left: 1px solid rgba(255, 255, 255, 0.5);
     border-radius: 15px;
-    /*background: rgba(255, 255, 255, 0.5);*/
     box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
     -webkit-backdrop-filter: blur(15px);
 }
@@ -23,6 +24,7 @@
 {
     padding: 20px 0;
     text-align: center;
+    color: var(--text-color);
     border-bottom: 1px solid #C0C0C0;
 }
 
@@ -32,11 +34,18 @@ form
     padding: 10px 40px;
 }
 
-form .field
+form .field,
+form .select-field
 {
     position: relative;
     margin: 20px 0;
     border-bottom: 2px solid var(--text-color);
+}
+
+form .field:hover,
+form .select-field:hover
+{
+    border-color: var(--highlight-color);
 }
 
 .field input
@@ -51,9 +60,9 @@ form .field
     background: none;
 }
 
-#readonly-field input {
+#readonly-field input
+{
     position: relative;
-    left: 85%;
 }
 
 #readonly-field input::-webkit-inner-spin-button,
@@ -69,7 +78,8 @@ form .field
     left: 70%;
 }
 
-.field label
+.field label,
+.select-field label
 {
     font-size: 16px;
     position: absolute;
@@ -111,7 +121,32 @@ form .field
 #date-field input[type='date']:valid ~ label
 {
     left: 20px;
-    color:var(--highlight-color);
+    color: var(--highlight-color);
+}
+
+input[type='submit']
+{
+    font-size: 14px;
+    font-weight: 500;
+    position: relative;
+    left: 50%;
+    width: 50%;
+    height: 50px;
+    cursor: pointer;
+    transform: translateX(-50%);
+    color: #E9F4FB;
+    border: none;
+    border-radius: 25px;
+    outline: none;
+    background: var(--highlight-color);
+}
+
+.submission-message
+{
+    font-size: 16px;
+    margin: 30px 0;
+    text-align: center;
+    color: var(--text-color);
 }
 
 .light
