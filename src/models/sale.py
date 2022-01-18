@@ -8,7 +8,7 @@ from dataclasses import dataclass
 from datetime import date, timedelta
 from typing import Any
 
-import health_warehouse.database.connection
+import src.database.connection
 
 
 @dataclass
@@ -34,7 +34,7 @@ class Sale:
             VALUES ({self.id}, '{self.date}', {self.medicine_id}, {self.quantity})
         '''
 
-        health_warehouse.database.connection.add_to_database(command)
+        src.database.connection.add_to_database(command)
 
     @staticmethod
     def get_all() -> list[Sale]:
@@ -51,7 +51,7 @@ class Sale:
 
         all_sales: list[Sale] = []
 
-        query_result: list[tuple[Any, ...]] = health_warehouse.database.connection.get_from_database(query)
+        query_result: list[tuple[Any, ...]] = src.database.connection.get_from_database(query)
 
         for sale_constructor_args in query_result:
             all_sales.append(Sale(*sale_constructor_args))
@@ -71,7 +71,7 @@ class Sale:
             FROM health_warehouse_db.sales
         '''
 
-        query_result: list[tuple[Any, ...]] = health_warehouse.database.connection.get_from_database(query)
+        query_result: list[tuple[Any, ...]] = src.database.connection.get_from_database(query)
         return [id_[0] for id_ in query_result]
 
     @staticmethod
@@ -90,7 +90,7 @@ class Sale:
             WHERE id = {id_}
         '''
 
-        query_result: list[tuple[Any, ...]] = health_warehouse.database.connection.get_from_database(query)
+        query_result: list[tuple[Any, ...]] = src.database.connection.get_from_database(query)
         return Sale(*query_result[0] if query_result else None)
 
     @staticmethod

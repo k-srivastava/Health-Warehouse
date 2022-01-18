@@ -5,7 +5,7 @@ from datetime import timedelta
 
 from flask import Flask, redirect, url_for, render_template
 
-from health_warehouse.blueprints.account import account
+from src.blueprints.account import account
 
 try:
     # Windows implementation to open the HTML documentation file in the browser.

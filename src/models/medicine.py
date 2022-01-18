@@ -8,7 +8,7 @@ from dataclasses import dataclass, field
 from datetime import date
 from typing import Any
 
-import health_warehouse.database.connection
+import src.database.connection
 
 
 @dataclass
@@ -83,7 +83,7 @@ class Medicine:
             )
         '''
 
-        health_warehouse.database.connection.add_to_database(command)
+        src.database.connection.add_to_database(command)
 
     @staticmethod
     def update_in_database(medicine_id: int, field_name: str, new_value: Any):
@@ -99,7 +99,7 @@ class Medicine:
             WHERE id = {medicine_id}
         '''
 
-        health_warehouse.database.connection.add_to_database(command)
+        src.database.connection.add_to_database(command)
 
     @staticmethod
     def get_all() -> list[Medicine]:
@@ -116,7 +116,7 @@ class Medicine:
 
         all_medicines: list[Medicine] = []
 
-        query_result: list[tuple[Any, ...]] = health_warehouse.database.connection.get_from_database(query)
+        query_result: list[tuple[Any, ...]] = src.database.connection.get_from_database(query)
 
         for medicine_constructor_args in query_result:
             all_medicines.append(Medicine(*medicine_constructor_args))
@@ -157,7 +157,7 @@ class Medicine:
             FROM health_warehouse_db.medicines
         '''
 
-        query_result: list[tuple[Any, ...]] = health_warehouse.database.connection.get_from_database(query)
+        query_result: list[tuple[Any, ...]] = src.database.connection.get_from_database(query)
         return [id_[0] for id_ in query_result]
 
     @staticmethod
@@ -176,7 +176,7 @@ class Medicine:
             WHERE id = {id_}
         '''
 
-        query_result: list[tuple[Any, ...]] = health_warehouse.database.connection.get_from_database(query)
+        query_result: list[tuple[Any, ...]] = src.database.connection.get_from_database(query)
         return Medicine(*query_result[0]) if query_result else None
 
     @staticmethod
