@@ -5,7 +5,7 @@ from datetime import timedelta
 
 from flask import Flask, redirect, url_for, render_template
 
-from src.blueprints.account import account
+from blueprints.account import account
 
 try:
     # Windows implementation to open the HTML documentation file in the browser.
@@ -19,7 +19,7 @@ except ImportError:
 
     os_ = 'unix'
 
-app = Flask(__name__, static_folder='static', template_folder='templates')
+app = Flask(__name__, static_folder='../static', template_folder='../templates')
 app.secret_key = '238746bq2837o64478e6o'
 app.permanent_session_lifetime = timedelta(minutes=10)
 
