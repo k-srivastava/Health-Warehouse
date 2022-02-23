@@ -29,6 +29,9 @@ class CardQuantityType(Enum):
 
 @dataclass
 class Card:
+    """
+    Base card class for the GUI information card elements.
+    """
     type: CardType = field(init=False)
     serial_number: int
     title: str
@@ -49,6 +52,9 @@ class Card:
 
 @dataclass
 class TextCard(Card):
+    """
+    Subclass of the Card class that only contains textual information.
+    """
     content: str
     summary_title: str
 
@@ -131,6 +137,9 @@ class TextCard(Card):
 
 @dataclass
 class DataCard(Card):
+    """
+    Subclass of the Card class that contains textual and graphical information. The graph is the pie chart.
+    """
     graph_title: str
     graph_percentage: int
 

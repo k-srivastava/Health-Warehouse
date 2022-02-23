@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Models &mdash; Health Warehouse 0.9.5 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="JavaScript" href="scripts.html" />
+    <link rel="prev" title="Database" href="database.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Health Warehouse
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="blueprints.html">Blueprints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="database.html">Database</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Models</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#card-classes">Card Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cards">Cards</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#employee">Employee</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#medicine">Medicine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sale">Sale</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="scripts.html">JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="app_file.html">app.py</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Health Warehouse</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Models</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/models.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="models">
+<h1>Models<a class="headerlink" href="#models" title="Permalink to this headline"></a></h1>
+<section id="card-classes">
+<h2>Card Classes<a class="headerlink" href="#card-classes" title="Permalink to this headline"></a></h2>
+<dl class="py data">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">File</span> <span class="pre">Description</span></span></dt>
+<dd><p>File to create the base information card class.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="card_classes.CardType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">card_classes.</span></span><span class="sig-name descname"><span class="pre">CardType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Enum</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#card_classes.CardType" title="Permalink to this definition"></a></dt>
+<dd><p>Enum specifying whether the card is a text card or data card.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="card_classes.CardQuantityType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">card_classes.</span></span><span class="sig-name descname"><span class="pre">CardQuantityType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Enum</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#card_classes.CardQuantityType" title="Permalink to this definition"></a></dt>
+<dd><p>Enum specifying whether the quantity the card talks about is “most” or “least”. Useful to create custom card
+descriptions easily.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="card_classes.Card">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">card_classes.</span></span><span class="sig-name descname"><span class="pre">Card</span></span><a class="headerlink" href="#card_classes.Card" title="Permalink to this definition"></a></dt>
+<dd><p>Base card class for the GUI information card elements.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="card_classes.Card.display_number">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">display_number</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#card_classes.Card.display_number" title="Permalink to this definition"></a></dt>
+<dd><p>Property that modifies the cards serial number to have a leading zero if the number is a single digit to make
+it more presentable in a larger font.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Display number of the card, modified with the required leading zeroes.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">card_classes.TextCard(Card):</span></span></dt>
+<dd><p>Subclass of the Card class that only contains textual information.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="card_classes.TextCard.__post_init__">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">card_classes.TextCard.</span></span><span class="sig-name descname"><span class="pre">__post_init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#card_classes.TextCard.__post_init__" title="Permalink to this definition"></a></dt>
+<dd><p>Automatically set the type of the card to a text card after the class is initialised.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="card_classes.TextCard.sale_card">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">card_classes.TextCard.</span></span><span class="sig-name descname"><span class="pre">sale_card</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">serial_number</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">medicine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#medicine.Medicine" title="medicine.Medicine"><span class="pre">Medicine</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sale_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#card_classes.CardQuantityType" title="card_classes.CardQuantityType"><span class="pre">CardQuantityType</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">TextCard</span></span></span><a class="headerlink" href="#card_classes.TextCard.sale_card" title="Permalink to this definition"></a></dt>
+<dd><p>Create a new sale related text card using a fixed template to avoid having to write the card information every
+time.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>serial_number</strong> (<em>int</em>) – Serial number of the card.</p></li>
+<li><p><strong>medicine</strong> (<a class="reference internal" href="#medicine.Medicine" title="medicine.Medicine"><em>Medicine</em></a><em> | </em><em>None</em>) – Medicine which the card is talking about, or None.</p></li>
+<li><p><strong>sale_type</strong> (<a class="reference internal" href="#card_classes.CardQuantityType" title="card_classes.CardQuantityType"><em>CardQuantityType</em></a>) – Whether the sale of the medicine was the most or the least out of all.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Customised text card about the medicine sale if the medicine is given else, a default blank card.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>TextCard</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="card_classes.TextCard.stock_card">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">card_classes.TextCard.</span></span><span class="sig-name descname"><span class="pre">stock_card</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">serial_number</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">medicine</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#medicine.Medicine" title="medicine.Medicine"><span class="pre">Medicine</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">stock_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#card_classes.CardQuantityType" title="card_classes.CardQuantityType"><span class="pre">CardQuantityType</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">TextCard</span></span></span><a class="headerlink" href="#card_classes.TextCard.stock_card" title="Permalink to this definition"></a></dt>
+<dd><p>Create a new stock related text card using a fixed template to avoid having to write the card information every
+time.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>serial_number</strong> (<em>int</em>) – Serial number of the card.</p></li>
+<li><p><strong>medicine</strong> (<a class="reference internal" href="#medicine.Medicine" title="medicine.Medicine"><em>Medicine</em></a><em> | </em><em>None</em>) – Medicine which the card is talking about.</p></li>
+<li><p><strong>stock_type</strong> (<a class="reference internal" href="#card_classes.CardQuantityType" title="card_classes.CardQuantityType"><em>CardQuantityType</em></a>) – Whether the sale of the medicine was the most or the least out of all.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Customised text card about the medicine stock.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>TextCard</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="card_classes.DataCard">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">card_classes.</span></span><span class="sig-name descname"><span class="pre">DataCard</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Card</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#card_classes.DataCard" title="Permalink to this definition"></a></dt>
+<dd><p>Subclass of the Card class that contains textual and graphical information. The graph is the pie chart.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="card_classes.DataCard.__post_init__">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__post_init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#card_classes.DataCard.__post_init__" title="Permalink to this definition"></a></dt>
+<dd><p>Automatically set the type of the card to a data card after the class is initialised.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="cards">
+<h2>Cards<a class="headerlink" href="#cards" title="Permalink to this headline"></a></h2>
+<dl class="py data">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">File</span> <span class="pre">Description</span></span></dt>
+<dd><p>File to create and manage all of the information cards for the dashboard and manage all its surrounding data.</p>
+</dd></dl>
+
+</section>
+<section id="employee">
+<h2>Employee<a class="headerlink" href="#employee" title="Permalink to this headline"></a></h2>
+<dl class="py data">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">File</span> <span class="pre">Description</span></span></dt>
+<dd><p>Main employee file. Generate all the database models for the employees in the MySQL database.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="employee.Employee">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">employee.</span></span><span class="sig-name descname"><span class="pre">Employee</span></span><a class="headerlink" href="#employee.Employee" title="Permalink to this definition"></a></dt>
+<dd><p>Employee dataclass representing a medicine store employee.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="employee.Employee.__post_init__">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__post_init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#employee.Employee.__post_init__" title="Permalink to this definition"></a></dt>
+<dd><p>Generate a random unique employee ID and assign the gender to be the first letter, capitalised after the class
+is initialised.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="employee.Employee.full_name">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">full_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#employee.Employee.full_name" title="Permalink to this definition"></a></dt>
+<dd><p>Property that sets the full name of the employee as a formatted string to make it more readable when it is
+very long, for instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Full name of the employee, truncated to the first 17 characters.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="employee.Employee.add_to_database">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">add_to_database</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#employee.Employee.add_to_database" title="Permalink to this definition"></a></dt>
+<dd><p>Add the employee data to the database using a MySQL command.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="employee.Employee.get_all">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#employee.Employee" title="employee.Employee"><span class="pre">Employee</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#employee.Employee.get_all" title="Permalink to this definition"></a></dt>
+<dd><p>Get all the employees from the database using a MySQL query.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>List of all the employees in the database.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list[<a class="reference internal" href="#employee.Employee" title="employee.Employee">Employee</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="employee.Employee.get_all_ids">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_all_ids</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#employee.Employee.get_all_ids" title="Permalink to this definition"></a></dt>
+<dd><p>Get all the employee IDs from the database using a MySQL query.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>List of all the employee IDs in the database.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="employee.Employee.get_by_id">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_by_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id_</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#employee.Employee" title="employee.Employee"><span class="pre">Employee</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#employee.Employee.get_by_id" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve a specific employee from the database using a MySQL query with the employee’s ID as primary key.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>id</strong> (<em>int</em>) – Employee ID for the specific employee, primary key.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Employee data if an employee with the given ID exists in the database else None.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#employee.Employee" title="employee.Employee">Employee</a> | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="employee.Employee.get_by_email_address">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_by_email_address</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">email_address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#employee.Employee" title="employee.Employee"><span class="pre">Employee</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#employee.Employee.get_by_email_address" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve a specific employee from the database using a MySQL query with the employee’s email address which
+should be unique, although, it is not the primary key. Used when authenticating the employee during login.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>email_address</strong> (<em>str</em>) – Email address of the specific employee.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Employee data if an employee with the given email address exists in the database else None.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#employee.Employee" title="employee.Employee">Employee</a> | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="employee.Employee.generate_random_id">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">generate_random_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#employee.Employee.generate_random_id" title="Permalink to this definition"></a></dt>
+<dd><p>Generate a new unique random ID for a new employee.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>New random, unique employee ID.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="employee.Employee.match_password">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">match_password</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">email_address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#employee.Employee.match_password" title="Permalink to this definition"></a></dt>
+<dd><p>Used during login to confirm the employee’s email address and password against the database records.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>email_address</strong> (<em>str</em>) – Email address entered on the login page.</p></li>
+<li><p><strong>password</strong> (<em>str</em>) – Password entered on the login page.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if the email address and password match those on the database else False.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="medicine">
+<h2>Medicine<a class="headerlink" href="#medicine" title="Permalink to this headline"></a></h2>
+<dl class="py data">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">File</span> <span class="pre">Description</span></span></dt>
+<dd><p>Main medicine file. Generate all the database models for the medicines in the MySQL database.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="medicine.Medicine">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">medicine.</span></span><span class="sig-name descname"><span class="pre">Medicine</span></span><a class="headerlink" href="#medicine.Medicine" title="Permalink to this definition"></a></dt>
+<dd><p>Medicine dataclass for the inventory. Dates are stored as strings to be compatible with the MySQL date datatype.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="medicine.Medicine.__post_init__">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__post_init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#medicine.Medicine.__post_init__" title="Permalink to this definition"></a></dt>
+<dd><p>Assign a new unique random ID for the medicine if not provided in the constructor.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="medicine.Medicine._salts_str">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_salts_str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#medicine.Medicine._salts_str" title="Permalink to this definition"></a></dt>
+<dd><p>Convert the list of salts (str) into a single string with comma separated values which is easier to load into
+MySQL.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>All the medicine salts in one comma-separated string.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="medicine.Medicine.add_to_database">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">add_to_database</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#medicine.Medicine.add_to_database" title="Permalink to this definition"></a></dt>
+<dd><p>Add the medicine data to the database using a MySQL command.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="medicine.Medicine.update_in_database">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">update_in_database</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">medicine_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#medicine.Medicine.update_in_database" title="Permalink to this definition"></a></dt>
+<dd><p>Update a particular piece of medicine data in the database with updated data using a MySQL command.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="medicine.Medicine.get_all">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#medicine.Medicine" title="medicine.Medicine"><span class="pre">Medicine</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#medicine.Medicine.get_all" title="Permalink to this definition"></a></dt>
+<dd><p>Get all the medicines from the database using a MySQL query.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>List of all the medicines in the database.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list[<a class="reference internal" href="#medicine.Medicine" title="medicine.Medicine">Medicine</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="medicine.Medicine.get_as_json">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_as_json</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#medicine.Medicine.get_as_json" title="Permalink to this definition"></a></dt>
+<dd><p>Get all the medicines from the database using a MySQL query and parse their id, name, manufacturer and stock
+as JSON. Useful to transfer medicine data from Python to JavaScript.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Medicine data as JSON.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="medicine.Medicine.get_all_ids">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_all_ids</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#medicine.Medicine.get_all_ids" title="Permalink to this definition"></a></dt>
+<dd><p>Get all the medicine IDs from the database using a MySQL query.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>List of all the medicine IDs in the database.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="medicine.Medicine.get_by_id">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_by_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id_</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#medicine.Medicine" title="medicine.Medicine"><span class="pre">Medicine</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#medicine.Medicine.get_by_id" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve a specific medicine from the database using a MySQL query with the medicine’s ID as primary key.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>id</strong> (<em>int</em>) – Medicine ID for the specific medicine, primary key.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Medicine data if a medicine with the given ID exists in the database else None.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#medicine.Medicine" title="medicine.Medicine">Medicine</a> | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="medicine.Medicine.get_quantities_sorted">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_quantities_sorted</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reverse</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#medicine.Medicine" title="medicine.Medicine"><span class="pre">Medicine</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#medicine.Medicine.get_quantities_sorted" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve all of the medicines from the database using a MySQL query and sort them on the basis of their
+quantities.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>reverse</strong> (<em>bool</em>) – Reverse the order of the sorting, defaults to False.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List of all medicines sorted by their quantities.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list[<a class="reference internal" href="#medicine.Medicine" title="medicine.Medicine">Medicine</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="medicine.Medicine.get_stock_sorted">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_stock_sorted</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reverse</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#medicine.Medicine" title="medicine.Medicine"><span class="pre">Medicine</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#medicine.Medicine.get_stock_sorted" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve all of the medicines from the database using a MySQL query and sort them on the basis of their stocks.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>reverse</strong> (<em>bool</em>) – Reverse the order of the sorting, defaults to False.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List of all medicines sorted by their stocks.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list[<a class="reference internal" href="#medicine.Medicine" title="medicine.Medicine">Medicine</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="medicine.Medicine.generate_random_id">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">generate_random_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#medicine.Medicine.generate_random_id" title="Permalink to this definition"></a></dt>
+<dd><p>Generate a new unique random ID for a new medicine.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>New random, unique medicine ID.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="sale">
+<h2>Sale<a class="headerlink" href="#sale" title="Permalink to this headline"></a></h2>
+<dl class="py data">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">File</span> <span class="pre">Description</span></span></dt>
+<dd><p>Main sales file. Generate all the database models for the sales in the MySQL database.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sale.Sale">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sale.</span></span><span class="sig-name descname"><span class="pre">Sale</span></span><a class="headerlink" href="#sale.Sale" title="Permalink to this definition"></a></dt>
+<dd><p>Sale dataclass for the inventory. Dates are stored as strings to be compatible with the MySQL date datatype.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sale.Sale.__post_init__">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__post_init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sale.Sale.__post_init__" title="Permalink to this definition"></a></dt>
+<dd><p>Assign a new unique random ID for the medicine if not provided in the constructor.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sale.Sale.add_to_database">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">add_to_database</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#sale.Sale.add_to_database" title="Permalink to this definition"></a></dt>
+<dd><p>Add the medicine data to the database using a MySQL command.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sale.Sale.get_all">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#sale.Sale" title="sale.Sale"><span class="pre">Sale</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#sale.Sale.get_all" title="Permalink to this definition"></a></dt>
+<dd><p>Get all the sales from the database using a MySQL query.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>List of all the sales in the database.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list[<a class="reference internal" href="#sale.Sale" title="sale.Sale">Sale</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sale.Sale.get_all_ids">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_all_ids</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#sale.Sale.get_all_ids" title="Permalink to this definition"></a></dt>
+<dd><p>Get all the sale IDs from the database using a MySQL query.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>List of all the sale IDs in the database.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sale.Sale.get_by_id">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_by_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id_</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#sale.Sale" title="sale.Sale"><span class="pre">Sale</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#sale.Sale.get_by_id" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve a specific sale from the database using a MySQL query with the sale’s ID as primary key.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>id</strong> (<em>int</em>) – Sale ID for the specific sale, primary key.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Sale data if a sale with the given ID exists in the database else None.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#sale.Sale" title="sale.Sale">Sale</a> | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sale.Sale.get_all_this_week">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_all_this_week</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#sale.Sale" title="sale.Sale"><span class="pre">Sale</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#sale.Sale.get_all_this_week" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve all the sales made in the current week from the database using a MySQL query.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>List of all sales made in the current week.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list[<a class="reference internal" href="#sale.Sale" title="sale.Sale">Sale</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sale.Sale.get_all_last_week">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_all_last_week</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#sale.Sale" title="sale.Sale"><span class="pre">Sale</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#sale.Sale.get_all_last_week" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieve all the sales made in the last week from the database using a MySQL query.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>List of all sales made in the last week.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list[<a class="reference internal" href="#sale.Sale" title="sale.Sale">Sale</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sale.Sale.get_week_over_week">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_week_over_week</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#sale.Sale.get_week_over_week" title="Permalink to this definition"></a></dt>
+<dd><p>Get the number of sales made this week over the number of sales made last week.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Number of sales week-over-week.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sale.Sale.generate_random_id">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">generate_random_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#sale.Sale.generate_random_id" title="Permalink to this definition"></a></dt>
+<dd><p>Generate a new unique random ID for a new sale.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>New random, unique sale ID.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="database.html" class="btn btn-neutral float-left" title="Database" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="scripts.html" class="btn btn-neutral float-right" title="JavaScript" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Kshitij Srivastava.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

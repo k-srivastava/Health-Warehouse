@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blueprints &mdash; Health Warehouse 0.9.5 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Database" href="database.html" />
+    <link rel="prev" title="Welcome to Health Warehouse’s documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Health Warehouse
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Blueprints</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#account">Account</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="database.html">Database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scripts.html">JavaScript</a></li>
+<li class="toctree-l1"><a class="reference internal" href="app_file.html">app.py</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Health Warehouse</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Blueprints</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/blueprints.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="blueprints">
+<h1>Blueprints<a class="headerlink" href="#blueprints" title="Permalink to this headline"></a></h1>
+<section id="account">
+<h2>Account<a class="headerlink" href="#account" title="Permalink to this headline"></a></h2>
+<dl class="py data">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">File</span> <span class="pre">Description</span></span></dt>
+<dd><p>File to manage the account page and its respective subpages. These pages contain general information about the store
+and help manage sales, profits, stock and other items.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="account.login">
+<span class="sig-prename descclassname"><span class="pre">account.</span></span><span class="sig-name descname"><span class="pre">login</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Response</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></span><a class="headerlink" href="#account.login" title="Permalink to this definition"></a></dt>
+<dd><p>Main login page for the project.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Returns either the rendering of the template for ‘login.html’ if the user does not already have a session,
+else returns a redirect to the dashboard page.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Response | str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="account.logout">
+<span class="sig-prename descclassname"><span class="pre">account.</span></span><span class="sig-name descname"><span class="pre">logout</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Response</span></span></span><a class="headerlink" href="#account.logout" title="Permalink to this definition"></a></dt>
+<dd><p>Logout pseudo-page to delete session data and redirect back to the login page.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Redirect to the login page.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Response</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="account.dashboard">
+<span class="sig-prename descclassname"><span class="pre">account.</span></span><span class="sig-name descname"><span class="pre">dashboard</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Response</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></span><a class="headerlink" href="#account.dashboard" title="Permalink to this definition"></a></dt>
+<dd><p>Dashboard page where major / important information is displayed as cards.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>If the user is logged in, rendering of the template for ‘dashboard.html’ else, a redirect to the login
+page.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Response | str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="account.profile">
+<span class="sig-prename descclassname"><span class="pre">account.</span></span><span class="sig-name descname"><span class="pre">profile</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Response</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></span><a class="headerlink" href="#account.profile" title="Permalink to this definition"></a></dt>
+<dd><p>Profile page where employee information is displayed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>If the user is logged in, rendering of the template for ‘dashboard.html’ else, a redirect to the login
+page.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Response | str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="account.warehouse">
+<span class="sig-prename descclassname"><span class="pre">account.</span></span><span class="sig-name descname"><span class="pre">warehouse</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Response</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></span><a class="headerlink" href="#account.warehouse" title="Permalink to this definition"></a></dt>
+<dd><p>Warehouse page where data related to medicines stored, their stock and sales made is shown as tables.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>If the user is logged in, rendering of the template for ‘dashboard.html’ else, a redirect to the login
+page.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Response | str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="account.warehouse_add_medicine">
+<span class="sig-prename descclassname"><span class="pre">account.</span></span><span class="sig-name descname"><span class="pre">warehouse_add_medicine</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Response</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></span><a class="headerlink" href="#account.warehouse_add_medicine" title="Permalink to this definition"></a></dt>
+<dd><p>Add medicine page where new medicines for the database can be added using a form.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>If the user is logged in, rendering of the template for ‘dashboard.html’ else, a redirect to the login
+page.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Response | str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="account.warehouse_update_stock">
+<span class="sig-prename descclassname"><span class="pre">account.</span></span><span class="sig-name descname"><span class="pre">warehouse_update_stock</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Response</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></span><a class="headerlink" href="#account.warehouse_update_stock" title="Permalink to this definition"></a></dt>
+<dd><p>Update stock page where stock of existing medicines can be updated using a form.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>If the user is logged in, rendering of the template for ‘dashboard.html’ else, a redirect to the login
+page.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Response | str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="account.warehouse_new_sale">
+<span class="sig-prename descclassname"><span class="pre">account.</span></span><span class="sig-name descname"><span class="pre">warehouse_new_sale</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Response</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></span><a class="headerlink" href="#account.warehouse_new_sale" title="Permalink to this definition"></a></dt>
+<dd><p>New sale page where new sales can be logged using a form.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>If the user is logged in, rendering of the template for ‘dashboard.html’ else, a redirect to the login
+page.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Response | str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to Health Warehouse’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="database.html" class="btn btn-neutral float-right" title="Database" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Kshitij Srivastava.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

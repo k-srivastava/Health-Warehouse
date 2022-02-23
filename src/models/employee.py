@@ -13,6 +13,9 @@ import src.database.connection
 
 @dataclass
 class Employee:
+    """
+    Employee dataclass representing a medicine store employee.
+    """
     id: int | None
     first_name: str
     last_name: str

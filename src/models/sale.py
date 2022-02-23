@@ -13,6 +13,9 @@ import src.database.connection
 
 @dataclass
 class Sale:
+    """
+    Sale dataclass for the inventory. Dates are stored as strings to be compatible with the MySQL date datatype.
+    """
     id: int | None
     date: date
     medicine_id: int

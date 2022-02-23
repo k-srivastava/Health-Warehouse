@@ -14,7 +14,7 @@ import src.database.connection
 @dataclass
 class Medicine:
     """
-    Main medicine class for the inventory. Dates are stored as strings to be compatible with the MySQL date datatype.
+    Medicine dataclass for the inventory. Dates are stored as strings to be compatible with the MySQL date datatype.
     """
     id: int | None
     name: str
