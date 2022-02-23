@@ -4,6 +4,7 @@ Main Python file from which the Flask app is to be run. The app is hosted on loc
 from datetime import timedelta
 
 from flask import Flask, redirect, url_for, render_template
+from werkzeug.wrappers.response import Response
 
 from blueprints.account import account
 
@@ -27,7 +28,7 @@ app.register_blueprint(account, url_prefix='/account')
 
 
 @app.route('/')
-def homepage():
+def homepage() -> str:
     """
     Main homepage for the project containing an overview of the project.
 
@@ -38,7 +39,7 @@ def homepage():
 
 
 @app.route('/project')
-def project_redirect():
+def project_redirect() -> Response:
     """
     Redirect to the main project login page from the homepage.
 
@@ -49,7 +50,7 @@ def project_redirect():
 
 
 @app.route('/details')
-def details():
+def details() -> str:
     """
     Main project details page containing detailed information docs the project.
 
@@ -78,7 +79,7 @@ def docs():
 
 
 @app.route('/acknowledgements')
-def acknowledgement():
+def acknowledgement() -> str:
     """
     Project acknowledgements page.
 
