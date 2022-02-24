@@ -1,12 +1,14 @@
 # Computer Science Project — Class XII
 
-### Kshitij Srivastava (XI – A)
+### Kshitij Srivastava (XII – A)
 
 ## Introduction
 
 The aim of this project is to create a fully operational system for a medicine store to keep track of its day-to-day
 functioning — from keeping track of current inventory of medicine stock, to recommendations to restock certain
 medicines, to (possibly) generating beautiful invoices for the customer upon purchase — all done online.
+
+![Homepage Dark Mode](demo/homepage_dark.png "Homepage – Dark")
 
 ## Goals
 
@@ -51,7 +53,7 @@ The following libraries will bse used with Python:
 - ### Flask
     - Flask is a light and powerful Python framework to create basic websites using Python and HTML. This should make
       the project easy to maintain and making changes to the code quick and easy. It also makes it very easy to host
-      this project on a custom domain at a future date. The version of Flask being used for the project is 2.0.2.
+      this project on a custom domain at a future date. The version of Flask being used for the project is 2.0.3.
 
 - ### MySQL Connector
     - MySQL connector is a Python library that allows for easy connection to a local MySQL database used for storing all
@@ -75,3 +77,15 @@ support for Flask and easy linking of external databases.
 
 The project is open source and will be hosted on GitHub to ensure that the teacher can check up on the progress made on
 the development of the program at any time and allow foe the publishing and submission of the same online easily.
+
+## Tasks Completed
+
+After the completion of this project within a reasonable deadline, the following are tasks I was able to complete:
+
+✅ Inventory Management\
+✅ Connection to Local MySQL Database\
+✅ Frontend using Flask\
+✅ Complete Documentation using Sphinx\
+❌ Customer Invoice\
+❌ Book Keeping\
+✅ User Accounts
