@@ -1,74 +1,133 @@
 """
 File to create and manage all of the information cards for the dashboard and manage all its surrounding data.
 """
-from datetime import date, timedelta
+from collections import defaultdict
 
 from .card_classes import CardQuantityType, TextCard, DataCard
 from .medicine import Medicine
 from .sale import Sale
 
-_today = date.today()
-_yesterday = _today - timedelta(days=1)
 
-_medicine_quantities: list[Medicine] = Medicine.get_quantities_sorted()
-_medicine_stock: list[Medicine] = Medicine.get_stock_sorted()
+def _generate_sale_card() -> tuple[TextCard, TextCard]:
+    """
+    Private function to generate two sale quantity text cards that show the most and least sold medicines during the
+    current week.
 
-_all_sales_this_week: list[Sale] = Sale.get_all_this_week()
-_all_sales_last_week: list[Sale] = Sale.get_all_last_week()
-_sales_week_over_week: int = Sale.get_week_over_week()
+    :return: Cards with most and least sold medicine during the current week.
+    :rtype: tuple[TextCard, TextCard]
+    """
+    sales_this_week: list[Sale] = Sale.get_all_this_week()
 
-# Default to None if a medicine hasn't been sold in over a week.
-_most_sold_medicine: Medicine | None = _medicine_quantities[-1] if _medicine_quantities else None
-_least_sold_medicine: Medicine | None = _medicine_quantities[0] if _medicine_quantities else None
+    medicines_by_sale: defaultdict[int, int] = defaultdict(lambda: 0)
 
-_least_stocked_medicine: Medicine = _medicine_stock[0]
-_most_stocked_medicine: Medicine = _medicine_stock[-1]
+    for sale in sales_this_week:
+        medicines_by_sale[sale.medicine_id] += sale.quantity
 
-_num_sales_this_week: int = sum([sale.quantity for sale in _all_sales_this_week])
-_num_sales_last_week: int = sum([sale.quantity for sale in _all_sales_last_week])
+    # Sort all the medicine IDs by their sale during the current week and save as list of medicines.
+    medicines_sorted_by_sale: list[Medicine] = [
+        Medicine.get_by_id(key) for key, _ in sorted(medicines_by_sale.items(), key=lambda item: item[1])
+    ]
 
-# Create the text for the sale comparison card depending on the sales this week or the previous week.
-if _num_sales_last_week == 0 and _num_sales_this_week == 0:
-    _sales_percentage_week_over_week_change = 0
-    _sales_comparison_card_text1 = f'We sold no medicines this week or the last week.'
-    _sales_comparison_card_text2 = '.'
+    return (
+        TextCard.sale_card(1, medicines_sorted_by_sale[0], CardQuantityType.LEAST),
+        TextCard.sale_card(4, medicines_sorted_by_sale[-1], CardQuantityType.MOST)
+    )
 
-elif _num_sales_last_week == 0:
-    _sales_percentage_week_over_week_change = 0
-    _sales_comparison_card_text1 = f'We sold {_num_sales_this_week} medicines this week.'
-    _sales_comparison_card_text2 = 'We sold no medicines last week.'
 
-elif _num_sales_this_week == 0:
-    _sales_percentage_week_over_week_change = 0
-    _sales_comparison_card_text1 = f'We sold {_num_sales_last_week} medicines last week.'
-    _sales_comparison_card_text2 = 'We sold no medicines this week.'
+def _generate_stock_card() -> tuple[TextCard, TextCard]:
+    """
+    Private function to generate two current stock text cards that show the most and least stocked medicines.
 
-elif _num_sales_this_week > _num_sales_last_week:
-    _sales_percentage_week_over_week_change = round((_num_sales_this_week / _num_sales_last_week) * 100)
-    _sales_comparison_card_text1 = f'We sold {_sales_week_over_week} more medicines this week than last week.'
-    _sales_comparison_card_text2 = f', an increase of {_sales_percentage_week_over_week_change}% over last week.'
+    :return: Cards with the most and last stocked medicines.
+    :rtype: tuple[TextCard, TextCard]
+    """
+    stocks: list[Medicine] = Medicine.get_stock_sorted()
 
-else:
-    _sales_percentage_week_over_week_change = round((_num_sales_this_week / _num_sales_last_week) * 100)
-    _sales_comparison_card_text1 = f'We sold {-_sales_week_over_week} less medicines this week than last week.'
-    _sales_comparison_card_text2 = f', a decrease of {_sales_percentage_week_over_week_change}% over last week.'
+    return (
+        TextCard.stock_card(5, stocks[0], CardQuantityType.LEAST),
+        TextCard.stock_card(6, stocks[-1], CardQuantityType.MOST)
+    )
 
-_most_sold_card = TextCard.sale_card(1, _most_sold_medicine, CardQuantityType.MOST)
-_least_sold_card = TextCard.sale_card(4, _least_sold_medicine, CardQuantityType.LEAST)
 
-_least_stocked_card = TextCard.stock_card(5, _least_stocked_medicine, CardQuantityType.LEAST)
-_most_stocked_card = TextCard.stock_card(6, _most_stocked_medicine, CardQuantityType.MOST)
+def _generate_sales_comparison() -> DataCard:
+    """
+    Private function to generate a sales comparison data card that compares the number of units sold week over week
+    from the current week to the previous week.
 
-# Sales comparison card must be created manually since all data cards have wildly varying information that cannot be
-# condensed into a template like that for the text card.
-_sales_comparison_card = DataCard(
-    3, 'Weekly Sales',
-    f'{_sales_comparison_card_text1} We managed to sell {_num_sales_this_week} medicines this week and '
-    f'{_num_sales_last_week} medicines last week{_sales_comparison_card_text2}',
-    'WoW Increase',
-    int(abs(_sales_percentage_week_over_week_change))
-)
+    :return: Card with the sales comparison of the current and previous week.
+    :rtype: DataCard
+    """
+    sales_this_week: list[Sale] = Sale.get_all_this_week()
+    sales_last_week: list[Sale] = Sale.get_all_last_week()
 
-# Public variables to be accessed throughout the program.
-text_cards: list[TextCard] = [_most_sold_card, _least_sold_card, _least_stocked_card, _most_stocked_card]
-data_cards: list[DataCard] = [_sales_comparison_card, _sales_comparison_card]
+    serial_number = 2
+    title = 'Sales'
+
+    if not sales_this_week and not sales_last_week:
+        card = DataCard(serial_number, title, 'No sales made this week or last week.', 'Sales', 0)
+
+    elif sales_this_week and not sales_last_week:
+        num_sales_this_week: int = sum(sale.quantity for sale in sales_this_week)
+
+        card = DataCard(
+            serial_number, title,
+            f'No sales were made last week. But, {num_sales_this_week} units have been sold this week.',
+            'Sales', 100
+        )
+
+    elif not sales_this_week and sales_last_week:
+        num_sales_last_week: int = sum(sale.quantity for sale in sales_last_week)
+
+        card = DataCard(
+            serial_number, title,
+            f'No sales made this week. But, {num_sales_last_week} units were sold last week.',
+            'Sales', 0
+        )
+
+    else:
+        num_sales_this_week: int = sum(sale.quantity for sale in sales_this_week)
+        num_sales_last_week: int = sum(sale.quantity for sale in sales_last_week)
+
+        sales_week_over_week: int = abs(num_sales_this_week - num_sales_last_week)
+        more_sales_this_week: bool = num_sales_this_week > num_sales_last_week
+
+        card = DataCard(
+            serial_number, title,
+            f'{num_sales_this_week} units sold this week and {num_sales_last_week} units sold last week. '
+            f'An {"increase" if more_sales_this_week else "decrease"} of {sales_week_over_week} over last week.',
+            'Sales WoW', int(sales_week_over_week / num_sales_this_week * 100)
+        )
+
+    return card
+
+
+def generate_all_text_cards() -> list[TextCard]:
+    """
+    Generate all of the text cards for the dashboard view.
+
+    :return: All of the text cards.
+    :rtype: list[TextCard]
+    """
+    return [
+        *_generate_sale_card(),
+        *_generate_stock_card()
+    ]
+
+
+def generate_all_data_cards() -> list[DataCard]:
+    """
+    Generate all of the data cards for the dashboard view.
+
+    :return: All of the data cards.
+    :rtype: list[DataCard]
+    """
+    return [
+        _generate_sales_comparison(),
+
+        # Sample data card.
+        DataCard(
+            3, 'Test Data',
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.',
+            'Graph Title', 75
+        )
+    ]

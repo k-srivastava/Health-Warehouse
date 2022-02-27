@@ -80,6 +80,43 @@ Cards
 
     File to create and manage all of the information cards for the dashboard and manage all its surrounding data.
 
+.. py:function:: cards._generate_sale_card() -> tuple[TextCard, TextCard]
+
+    Private function to generate two sale quantity text cards that show the most and least sold medicines during the
+    current week.
+
+    :return: Cards with most and least sold medicine during the current week.
+    :rtype: tuple[TextCard, TextCard]
+
+.. py:function:: cards._generate_stock_card() -> tuple[TextCard, TextCard]
+
+    Private function to generate two current stock text cards that show the most and least stocked medicines.
+
+    :return: Cards with the most and last stocked medicines.
+    :rtype: tuple[TextCard, TextCard]
+
+.. py:function:: cards._generate_sales_comparison() -> DataCard
+
+    Private function to generate a sales comparison data card that compares the number of units sold week over week
+    from the current week to the previous week.
+
+    :return: Card with the sales comparison of the current and previous week.
+    :rtype: DataCard
+
+.. py:function:: cards.generate_all_text_cards() -> list[TextCard]
+
+    Generate all of the text cards for the dashboard view.
+
+    :return: All of the text cards.
+    :rtype: list[TextCard]
+
+.. py:function:: cards.generate_all_data_cards() -> list[DataCard]
+
+    Generate all of the data cards for the dashboard view.
+
+    :return: All of the data cards.
+    :rtype: list[DataCard]
+
 Employee
 --------
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Models &mdash; Health Warehouse 0.9.5 documentation</title>
@@ -110,10 +110,10 @@ descriptions easily.</p>
 <dd><p>Property that modifies the cards serial number to have a leading zero if the number is a single digit to make
 it more presentable in a larger font.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Display number of the card, modified with the required leading zeroes.</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>str</p>
 </dd>
 </dl>
@@ -137,17 +137,17 @@ it more presentable in a larger font.</p>
 <dd><p>Create a new sale related text card using a fixed template to avoid having to write the card information every
 time.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>serial_number</strong> (<em>int</em>) – Serial number of the card.</p></li>
 <li><p><strong>medicine</strong> (<a class="reference internal" href="#medicine.Medicine" title="medicine.Medicine"><em>Medicine</em></a><em> | </em><em>None</em>) – Medicine which the card is talking about, or None.</p></li>
 <li><p><strong>sale_type</strong> (<a class="reference internal" href="#card_classes.CardQuantityType" title="card_classes.CardQuantityType"><em>CardQuantityType</em></a>) – Whether the sale of the medicine was the most or the least out of all.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Customised text card about the medicine sale if the medicine is given else, a default blank card.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>TextCard</p>
 </dd>
 </dl>
@@ -159,17 +159,17 @@ time.</p>
 <dd><p>Create a new stock related text card using a fixed template to avoid having to write the card information every
 time.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>serial_number</strong> (<em>int</em>) – Serial number of the card.</p></li>
 <li><p><strong>medicine</strong> (<a class="reference internal" href="#medicine.Medicine" title="medicine.Medicine"><em>Medicine</em></a><em> | </em><em>None</em>) – Medicine which the card is talking about.</p></li>
 <li><p><strong>stock_type</strong> (<a class="reference internal" href="#card_classes.CardQuantityType" title="card_classes.CardQuantityType"><em>CardQuantityType</em></a>) – Whether the sale of the medicine was the most or the least out of all.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Customised text card about the medicine stock.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>TextCard</p>
 </dd>
 </dl>
@@ -198,6 +198,78 @@ time.</p>
 <dd><p>File to create and manage all of the information cards for the dashboard and manage all its surrounding data.</p>
 </dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="cards._generate_sale_card">
+<span class="sig-prename descclassname"><span class="pre">cards.</span></span><span class="sig-name descname"><span class="pre">_generate_sale_card</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">TextCard</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">TextCard</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cards._generate_sale_card" title="Permalink to this definition"></a></dt>
+<dd><p>Private function to generate two sale quantity text cards that show the most and least sold medicines during the
+current week.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Cards with most and least sold medicine during the current week.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple[TextCard, TextCard]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cards._generate_stock_card">
+<span class="sig-prename descclassname"><span class="pre">cards.</span></span><span class="sig-name descname"><span class="pre">_generate_stock_card</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">TextCard</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">TextCard</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cards._generate_stock_card" title="Permalink to this definition"></a></dt>
+<dd><p>Private function to generate two current stock text cards that show the most and least stocked medicines.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Cards with the most and last stocked medicines.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple[TextCard, TextCard]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cards._generate_sales_comparison">
+<span class="sig-prename descclassname"><span class="pre">cards.</span></span><span class="sig-name descname"><span class="pre">_generate_sales_comparison</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#card_classes.DataCard" title="card_classes.DataCard"><span class="pre">DataCard</span></a></span></span><a class="headerlink" href="#cards._generate_sales_comparison" title="Permalink to this definition"></a></dt>
+<dd><p>Private function to generate a sales comparison data card that compares the number of units sold week over week
+from the current week to the previous week.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Card with the sales comparison of the current and previous week.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#card_classes.DataCard" title="card_classes.DataCard">DataCard</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cards.generate_all_text_cards">
+<span class="sig-prename descclassname"><span class="pre">cards.</span></span><span class="sig-name descname"><span class="pre">generate_all_text_cards</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">TextCard</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cards.generate_all_text_cards" title="Permalink to this definition"></a></dt>
+<dd><p>Generate all of the text cards for the dashboard view.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>All of the text cards.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[TextCard]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cards.generate_all_data_cards">
+<span class="sig-prename descclassname"><span class="pre">cards.</span></span><span class="sig-name descname"><span class="pre">generate_all_data_cards</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#card_classes.DataCard" title="card_classes.DataCard"><span class="pre">DataCard</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#cards.generate_all_data_cards" title="Permalink to this definition"></a></dt>
+<dd><p>Generate all of the data cards for the dashboard view.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>All of the data cards.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[<a class="reference internal" href="#card_classes.DataCard" title="card_classes.DataCard">DataCard</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 <section id="employee">
 <h2>Employee<a class="headerlink" href="#employee" title="Permalink to this headline"></a></h2>
@@ -224,10 +296,10 @@ is initialised.</p>
 <dd><p>Property that sets the full name of the employee as a formatted string to make it more readable when it is
 very long, for instance.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Full name of the employee, truncated to the first 17 characters.</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>str</p>
 </dd>
 </dl>
@@ -244,10 +316,10 @@ very long, for instance.</p>
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#employee.Employee" title="employee.Employee"><span class="pre">Employee</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#employee.Employee.get_all" title="Permalink to this definition"></a></dt>
 <dd><p>Get all the employees from the database using a MySQL query.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>List of all the employees in the database.</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>list[<a class="reference internal" href="#employee.Employee" title="employee.Employee">Employee</a>]</p>
 </dd>
 </dl>
@@ -258,10 +330,10 @@ very long, for instance.</p>
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_all_ids</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#employee.Employee.get_all_ids" title="Permalink to this definition"></a></dt>
 <dd><p>Get all the employee IDs from the database using a MySQL query.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>List of all the employee IDs in the database.</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>list[int]</p>
 </dd>
 </dl>
@@ -272,13 +344,13 @@ very long, for instance.</p>
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_by_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id_</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#employee.Employee" title="employee.Employee"><span class="pre">Employee</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#employee.Employee.get_by_id" title="Permalink to this definition"></a></dt>
 <dd><p>Retrieve a specific employee from the database using a MySQL query with the employee’s ID as primary key.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>id</strong> (<em>int</em>) – Employee ID for the specific employee, primary key.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Employee data if an employee with the given ID exists in the database else None.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#employee.Employee" title="employee.Employee">Employee</a> | None</p>
 </dd>
 </dl>
@@ -290,13 +362,13 @@ very long, for instance.</p>
 <dd><p>Retrieve a specific employee from the database using a MySQL query with the employee’s email address which
 should be unique, although, it is not the primary key. Used when authenticating the employee during login.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>email_address</strong> (<em>str</em>) – Email address of the specific employee.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Employee data if an employee with the given email address exists in the database else None.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#employee.Employee" title="employee.Employee">Employee</a> | None</p>
 </dd>
 </dl>
@@ -307,10 +379,10 @@ should be unique, although, it is not the primary key. Used when authenticating 
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">generate_random_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#employee.Employee.generate_random_id" title="Permalink to this definition"></a></dt>
 <dd><p>Generate a new unique random ID for a new employee.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>New random, unique employee ID.</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>int</p>
 </dd>
 </dl>
@@ -321,16 +393,16 @@ should be unique, although, it is not the primary key. Used when authenticating 
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">match_password</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">email_address</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#employee.Employee.match_password" title="Permalink to this definition"></a></dt>
 <dd><p>Used during login to confirm the employee’s email address and password against the database records.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>email_address</strong> (<em>str</em>) – Email address entered on the login page.</p></li>
 <li><p><strong>password</strong> (<em>str</em>) – Password entered on the login page.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>True if the email address and password match those on the database else False.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>bool</p>
 </dd>
 </dl>
@@ -363,10 +435,10 @@ should be unique, although, it is not the primary key. Used when authenticating 
 <dd><p>Convert the list of salts (str) into a single string with comma separated values which is easier to load into
 MySQL.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>All the medicine salts in one comma-separated string.</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>str</p>
 </dd>
 </dl>
@@ -389,10 +461,10 @@ MySQL.</p>
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#medicine.Medicine" title="medicine.Medicine"><span class="pre">Medicine</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#medicine.Medicine.get_all" title="Permalink to this definition"></a></dt>
 <dd><p>Get all the medicines from the database using a MySQL query.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>List of all the medicines in the database.</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>list[<a class="reference internal" href="#medicine.Medicine" title="medicine.Medicine">Medicine</a>]</p>
 </dd>
 </dl>
@@ -404,10 +476,10 @@ MySQL.</p>
 <dd><p>Get all the medicines from the database using a MySQL query and parse their id, name, manufacturer and stock
 as JSON. Useful to transfer medicine data from Python to JavaScript.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Medicine data as JSON.</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>str</p>
 </dd>
 </dl>
@@ -418,10 +490,10 @@ as JSON. Useful to transfer medicine data from Python to JavaScript.</p>
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_all_ids</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#medicine.Medicine.get_all_ids" title="Permalink to this definition"></a></dt>
 <dd><p>Get all the medicine IDs from the database using a MySQL query.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>List of all the medicine IDs in the database.</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>list[int]</p>
 </dd>
 </dl>
@@ -432,13 +504,13 @@ as JSON. Useful to transfer medicine data from Python to JavaScript.</p>
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_by_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id_</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#medicine.Medicine" title="medicine.Medicine"><span class="pre">Medicine</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#medicine.Medicine.get_by_id" title="Permalink to this definition"></a></dt>
 <dd><p>Retrieve a specific medicine from the database using a MySQL query with the medicine’s ID as primary key.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>id</strong> (<em>int</em>) – Medicine ID for the specific medicine, primary key.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Medicine data if a medicine with the given ID exists in the database else None.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#medicine.Medicine" title="medicine.Medicine">Medicine</a> | None</p>
 </dd>
 </dl>
@@ -450,13 +522,13 @@ as JSON. Useful to transfer medicine data from Python to JavaScript.</p>
 <dd><p>Retrieve all of the medicines from the database using a MySQL query and sort them on the basis of their
 quantities.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>reverse</strong> (<em>bool</em>) – Reverse the order of the sorting, defaults to False.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>List of all medicines sorted by their quantities.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>list[<a class="reference internal" href="#medicine.Medicine" title="medicine.Medicine">Medicine</a>]</p>
 </dd>
 </dl>
@@ -467,13 +539,13 @@ quantities.</p>
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_stock_sorted</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reverse</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#medicine.Medicine" title="medicine.Medicine"><span class="pre">Medicine</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#medicine.Medicine.get_stock_sorted" title="Permalink to this definition"></a></dt>
 <dd><p>Retrieve all of the medicines from the database using a MySQL query and sort them on the basis of their stocks.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>reverse</strong> (<em>bool</em>) – Reverse the order of the sorting, defaults to False.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>List of all medicines sorted by their stocks.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>list[<a class="reference internal" href="#medicine.Medicine" title="medicine.Medicine">Medicine</a>]</p>
 </dd>
 </dl>
@@ -484,10 +556,10 @@ quantities.</p>
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">generate_random_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#medicine.Medicine.generate_random_id" title="Permalink to this definition"></a></dt>
 <dd><p>Generate a new unique random ID for a new medicine.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>New random, unique medicine ID.</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>int</p>
 </dd>
 </dl>
@@ -525,10 +597,10 @@ quantities.</p>
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#sale.Sale" title="sale.Sale"><span class="pre">Sale</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#sale.Sale.get_all" title="Permalink to this definition"></a></dt>
 <dd><p>Get all the sales from the database using a MySQL query.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>List of all the sales in the database.</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>list[<a class="reference internal" href="#sale.Sale" title="sale.Sale">Sale</a>]</p>
 </dd>
 </dl>
@@ -539,10 +611,10 @@ quantities.</p>
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_all_ids</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#sale.Sale.get_all_ids" title="Permalink to this definition"></a></dt>
 <dd><p>Get all the sale IDs from the database using a MySQL query.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>List of all the sale IDs in the database.</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>list[int]</p>
 </dd>
 </dl>
@@ -553,13 +625,13 @@ quantities.</p>
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_by_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id_</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#sale.Sale" title="sale.Sale"><span class="pre">Sale</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#sale.Sale.get_by_id" title="Permalink to this definition"></a></dt>
 <dd><p>Retrieve a specific sale from the database using a MySQL query with the sale’s ID as primary key.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>id</strong> (<em>int</em>) – Sale ID for the specific sale, primary key.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Sale data if a sale with the given ID exists in the database else None.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="#sale.Sale" title="sale.Sale">Sale</a> | None</p>
 </dd>
 </dl>
@@ -570,10 +642,10 @@ quantities.</p>
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_all_this_week</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#sale.Sale" title="sale.Sale"><span class="pre">Sale</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#sale.Sale.get_all_this_week" title="Permalink to this definition"></a></dt>
 <dd><p>Retrieve all the sales made in the current week from the database using a MySQL query.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>List of all sales made in the current week.</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>list[<a class="reference internal" href="#sale.Sale" title="sale.Sale">Sale</a>]</p>
 </dd>
 </dl>
@@ -584,10 +656,10 @@ quantities.</p>
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_all_last_week</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#sale.Sale" title="sale.Sale"><span class="pre">Sale</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#sale.Sale.get_all_last_week" title="Permalink to this definition"></a></dt>
 <dd><p>Retrieve all the sales made in the last week from the database using a MySQL query.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>List of all sales made in the last week.</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>list[<a class="reference internal" href="#sale.Sale" title="sale.Sale">Sale</a>]</p>
 </dd>
 </dl>
@@ -598,10 +670,10 @@ quantities.</p>
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_week_over_week</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#sale.Sale.get_week_over_week" title="Permalink to this definition"></a></dt>
 <dd><p>Get the number of sales made this week over the number of sales made last week.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Number of sales week-over-week.</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>int</p>
 </dd>
 </dl>
@@ -612,10 +684,10 @@ quantities.</p>
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">generate_random_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#sale.Sale.generate_random_id" title="Permalink to this definition"></a></dt>
 <dd><p>Generate a new unique random ID for a new sale.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>New random, unique sale ID.</p>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>int</p>
 </dd>
 </dl>

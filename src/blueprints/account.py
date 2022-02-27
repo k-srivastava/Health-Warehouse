@@ -7,7 +7,7 @@ import datetime
 from flask import Blueprint, render_template, redirect, url_for, request, session, Response
 from werkzeug.datastructures import ImmutableMultiDict
 
-from models.cards import text_cards, data_cards
+from models.cards import generate_all_text_cards, generate_all_data_cards
 from models.employee import Employee
 from models.medicine import Medicine
 from models.sale import Sale
@@ -71,7 +71,8 @@ def dashboard() -> Response | str:
     :rtype: Response | str
     """
     if 'email_address' in session:
-        return render_template('account/dashboard/dashboard.html', text_cards=text_cards, data_cards=data_cards)
+        return render_template('account/dashboard/dashboard.html', text_cards=generate_all_text_cards(),
+                               data_cards=generate_all_data_cards())
 
     return redirect(url_for('account.login'))
 
