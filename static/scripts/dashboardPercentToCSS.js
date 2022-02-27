@@ -9,8 +9,6 @@ for (let i = 0; i < h3Tags.length; i++) {
     const circleTag = circleTags[(i * 2) + 1];  // Get every second circle per data card.
     const percentageText = h3Tag.innerText;
 
-    console.log(percentageText)
-
     let percentageNum = ""
 
     for (let j = 0; j < percentageText.indexOf('%'); j++) {
