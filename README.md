@@ -1,5 +1,5 @@
-# Computer Science Project — Class XII
-
+# Health Warehouse
+## Computer Science Project — Class XII
 ### Kshitij Srivastava (XII – A)
 
 ## Introduction
@@ -43,17 +43,17 @@ build either due to time or complexity reasons but, if implemented, will be as p
 
 ### Python
 
-I shall be using Python 3.10 in a virtual environment for easy deployment without having to first install Python on
-another system. I will also split the code into multiple files to make the code more readable the easy to work with
-along with some basic object-oriented programming concepts to make the development of the program as easy and fun as
-possible.
+I shall be using Python 3.10 in a virtual environment for easy deployment without having to first install all Python
+packages on another system. I will also split the code into multiple files to make the code more readable and easy to
+work with along with some basic object-oriented programming concepts to make the development of the program as easy and
+as fun as possible.
 
 The following libraries will bse used with Python:
 
 - ### Flask
-    - Flask is a light and powerful Python framework to create basic websites using Python and HTML. This should make
-      the project easy to maintain and making changes to the code quick and easy. It also makes it very easy to host
-      this project on a custom domain at a future date. The version of Flask being used for the project is 2.0.3.
+    - Flask is a lightweight and powerful Python framework to create basic websites using Python and HTML. This should
+      make the project easy to maintain and allow changes to the code quickly and easily. It also makes it very easy to
+      host this project on a custom domain at a future date. The version of Flask being used for the project is 2.0.3.
 
 - ### MySQL Connector
     - MySQL connector is a Python library that allows for easy connection to a local MySQL database used for storing all
@@ -61,7 +61,8 @@ The following libraries will bse used with Python:
 
 - ### Sphinx
     - Sphinx is a Python library that helps to easily create an HTML file for project documentation using the
-      Restructured Text markup language in docstrings for the code.
+      Restructured Text markup language in docstrings for the Python code. It has also been used to document the
+      JavaScript code snippets as well.
 
 ### MySQL
 
@@ -70,17 +71,17 @@ backend to store all the vital project information like medicine details, employ
 
 ### IDE
 
-The IDE of choice for this project is Pycharm Professional as it has all the benefits of the Pycharm IDE but with added
-support for Flask and easy linking of external databases.
+The IDE of choice for this project is Pycharm Professional as it has all the benefits of the Pycharm Community Edition
+IDE but with added support for Flask and easy linking of external databases.
 
 ### Version Control
 
 The project is open source and will be hosted on GitHub to ensure that the teacher can check up on the progress made on
-the development of the program at any time and allow foe the publishing and submission of the same online easily.
+the development of the program at any time and allow for the publishing and submission of the same online.
 
 ## Tasks Completed
 
-After the completion of this project within a reasonable deadline, the following are tasks I was able to complete:
+After the completion of this project within a reasonable deadline, I was able to complete the following tasks:
 
 ✅ Inventory Management\
 ✅ Connection to Local MySQL Database\
