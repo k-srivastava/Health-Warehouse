@@ -93,11 +93,16 @@ def _generate_sales_comparison() -> DataCard:
         sales_week_over_week: int = abs(num_sales_this_week - num_sales_last_week)
         more_sales_this_week: bool = num_sales_this_week > num_sales_last_week
 
+        if more_sales_this_week:
+            sales_percentage = int(sales_week_over_week / num_sales_this_week * 100)
+        else:
+            sales_percentage = - int(sales_week_over_week / num_sales_last_week * 100)
+
         card = DataCard(
             serial_number, title,
             f'{num_sales_this_week} units sold this week and {num_sales_last_week} units sold last week. '
-            f'An {"increase" if more_sales_this_week else "decrease"} of {sales_week_over_week} over last week.',
-            'Sales WoW', int(sales_week_over_week / num_sales_this_week * 100)
+            f'{"An increase" if more_sales_this_week else "A decrease"} of {sales_week_over_week} over last week.',
+            'Sales WoW', sales_percentage
         )
 
     return card
