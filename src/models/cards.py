@@ -8,7 +8,7 @@ from .medicine import Medicine
 from .sale import Sale
 
 
-def _generate_sale_card() -> tuple[TextCard, TextCard]:
+def _generate_sale_card() -> tuple[TextCard, TextCard] | None:
     """
     Private function to generate two sale quantity text cards that show the most and least sold medicines during the
     current week.
@@ -17,7 +17,6 @@ def _generate_sale_card() -> tuple[TextCard, TextCard]:
     :rtype: tuple[TextCard, TextCard]
     """
     sales_this_week: list[Sale] = Sale.get_all_this_week()
-
     medicines_by_sale: defaultdict[int, int] = defaultdict(lambda: 0)
 
     for sale in sales_this_week:
@@ -27,6 +26,9 @@ def _generate_sale_card() -> tuple[TextCard, TextCard]:
     medicines_sorted_by_sale: list[Medicine] = [
         Medicine.get_by_id(key) for key, _ in sorted(medicines_by_sale.items(), key=lambda item: item[1])
     ]
+
+    if not sales_this_week:
+        return None
 
     return (
         TextCard.sale_card(1, medicines_sorted_by_sale[0], CardQuantityType.LEAST),
@@ -108,10 +110,13 @@ def generate_all_text_cards() -> list[TextCard]:
     :return: All of the text cards.
     :rtype: list[TextCard]
     """
-    return [
-        *_generate_sale_card(),
-        *_generate_stock_card()
-    ]
+    if _generate_sale_card() is not None:
+        return [
+            *_generate_sale_card(),
+            *_generate_stock_card()
+        ]
+
+    return [*_generate_stock_card()]
 
 
 def generate_all_data_cards() -> list[DataCard]:
