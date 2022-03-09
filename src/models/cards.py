@@ -1,6 +1,7 @@
 """
 File to create and manage all of the information cards for the dashboard and manage all its surrounding data.
 """
+import datetime
 from collections import defaultdict
 
 from .card_classes import CardQuantityType, TextCard, DataCard
@@ -8,7 +9,7 @@ from .medicine import Medicine
 from .sale import Sale
 
 
-def _generate_sale_card() -> tuple[TextCard, TextCard] | None:
+def _generate_sale_cards() -> tuple[TextCard, TextCard] | None:
     """
     Private function to generate two sale quantity text cards that show the most and least sold medicines during the
     current week.
@@ -48,6 +49,26 @@ def _generate_stock_card() -> tuple[TextCard, TextCard]:
     return (
         TextCard.stock_card(5, stocks[0], CardQuantityType.LEAST),
         TextCard.stock_card(6, stocks[-1], CardQuantityType.MOST)
+    )
+
+
+def _generate_expired_card() -> TextCard | None:
+    medicines = Medicine.get_all()
+    expired_medicines = [medicine for medicine in medicines if medicine.expiry_date < datetime.date.today()]
+
+    if not expired_medicines:
+        return None
+
+    total_cost = sum(medicine.sale_price * medicine.stock for medicine in expired_medicines)
+    num_expired = len(expired_medicines)
+
+    return TextCard(
+        7, 'Expired Medicines',
+        f'There are expired medicines in the warehouse! The total value of these medicines is ₹{total_cost}. '
+        f'Gid rid of and replace these immediately.',
+        f'{num_expired} medicine{"s" if num_expired > 1 else ""} {"have" if num_expired > 1 else "has"} expired in the '
+        f'warehouse. Urgent attention required.',
+        f'{num_expired} Expired'
     )
 
 
@@ -115,13 +136,21 @@ def generate_all_text_cards() -> list[TextCard]:
     :return: All of the text cards.
     :rtype: list[TextCard]
     """
-    if _generate_sale_card() is not None:
-        return [
-            *_generate_sale_card(),
-            *_generate_stock_card()
-        ]
+    sale_cards: tuple[TextCard, TextCard] | None = _generate_sale_cards()
+    stock_cards: tuple[TextCard, TextCard] = _generate_stock_card()
+    expiry_card: TextCard | None = _generate_expired_card()
 
-    return [*_generate_stock_card()]
+    text_cards: list[TextCard] = []
+
+    if sale_cards is not None:
+        text_cards.extend(sale_cards)
+
+    text_cards.extend(stock_cards)
+
+    if expiry_card is not None:
+        text_cards.append(expiry_card)
+
+    return text_cards
 
 
 def generate_all_data_cards() -> list[DataCard]:
