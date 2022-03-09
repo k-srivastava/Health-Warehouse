@@ -39,5 +39,5 @@ function getValidMedicines(medicineData) {
         }
     }
 
-    return validMedicines.slice(0, 8);
+    return validMedicines.slice(0, 6);
 }
