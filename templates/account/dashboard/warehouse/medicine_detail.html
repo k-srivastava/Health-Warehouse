@@ -1,0 +1,102 @@
+{% extends "account/dashboard/base.html" %}
+
+{% block title %}{{ medicine.name }} – {{ medicine.manufacturer }}{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/account/dashboard/warehouse/medicine_detail.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+{% endblock %}
+
+{% block content %}
+    <div class="circle"></div>
+    <div class="circle-secondary"></div>
+
+    <div class="medicine-card">
+        <div class="content">
+            <h1>{{ medicine.name[:2] }}</h1>
+            <h2>{{ medicine.manufacturer }}</h2>
+            <h2>{{ medicine.name }}</h2>
+
+            <h3>Prices</h3>
+            <p>Cost Price: ₹{{ medicine.cost_price }}</p>
+            <p>Sale Price: ₹{{ medicine.sale_price }}</p>
+            <br>
+
+            <h3>Dates</h3>
+            <p>Manufacturing Date: {{ medicine.manufacturing_date }}</p>
+            <p>Purchase Date: {{ medicine.purchase_date }}</p>
+            <p>Expiry Date: {{ medicine.expiry_date }}</p>
+            <br>
+
+            <h3>Medical Details</h3>
+            <p>Quantity: {{ medicine.quantity }}</p>
+            <p>Salts: {{ medicine.salts }}</p>
+            <p>Stock: {{ medicine.stock }}</p>
+
+            <h4>{{ medicine.id }}</h4>
+            <h4 id="potency">{{ medicine.potency }}</h4>
+        </div>
+    </div>
+
+    <div class="action-card" onclick="deleteMedicine()">
+        <span class="icon"><i class="fa fa-trash" aria-hidden="true"></i></span>
+    </div>
+
+    <div class="action-card" onclick="showWarningCard()">
+        <span class="icon"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i></span>
+    </div>
+
+    <div class="action-card" onclick="showInfoCard()">
+        <span class="icon"><i class="fas fa-info-circle" aria-hidden="true"></i></span>
+    </div>
+
+    <div class="warning-card">
+        <p>This medicine has expired! Please consider replacing it or listing alternatives with similar salts.</p>
+    </div>
+
+    <div class="info-card">
+        <ul>
+            {% if medicine.get_salt_alternatives() == [] %}
+                <li>No salt alternatives available!</li>
+            {% else %}
+                <li>{{ medicine.name }} has salt alternatives:</li>
+                <br>
+                {% for alternative in medicine.get_salt_alternatives() %}
+                    <li onclick="redirectToPage({{ alternative.id }})">{{ alternative.name }}
+                        — {{ alternative.manufacturer }}</li>
+                {% endfor %}
+            {% endif %}
+        </ul>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        const warningCard = document.getElementsByClassName('warning-card')[0];
+        const infoCard = document.getElementsByClassName('info-card')[0];
+
+        function deleteMedicine() {
+            if (confirm('Are you sure you want to delete this medicine and all related data?')) {
+                if (confirm('This action cannot be undone! Proceed?')) {
+                    window.location.replace('/account/warehouse');
+                    {{ medicine.drop_from_database() }}
+                }
+            }
+        }
+
+        function showWarningCard() {
+            infoCard.style.visibility = 'hidden';
+            warningCard.style.visibility = warningCard.style.visibility === 'hidden' ? 'visible' : 'hidden';
+        }
+
+        function showInfoCard() {
+            warningCard.style.visibility = 'hidden';
+            infoCard.style.visibility = infoCard.style.visibility === 'hidden' ? 'visible' : 'hidden';
+        }
+
+        function redirectToPage(alternativeId) {
+            window.location.href = `${alternativeId}`;
+        }
+    </script>
+{% endblock %}

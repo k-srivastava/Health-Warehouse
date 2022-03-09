@@ -1,0 +1,47 @@
+{% extends "account/dashboard/base.html" %}
+
+{% block title %}Medicine List{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/account/dashboard/warehouse/medicine_list.css') }}">
+{% endblock %}
+
+{% block content %}
+    <div class="circle"></div>
+
+    <div class="medicine-list">
+        <div class="search">
+            <input type="text" name="medicine-name" id="search-bar" placeholder="Medicine Name" oninput="getMatchingResult()">
+        </div>
+
+        <div class="valid-medicines">
+            <ul id="valid-medicine-list"></ul>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='scripts/currentMedicine.js') }}"></script>
+
+    <script>
+        const medicineData = JSON.parse({{ medicines_json|tojson }});
+        const validMedicineList = document.getElementById('valid-medicine-list');
+        let validMedicines;
+
+        function getMatchingResult() {
+            validMedicineList.innerHTML = null;
+            validMedicines = getValidMedicines(medicineData);
+
+            for (let medicine of validMedicines) {
+                const li = document.createElement('li')
+                li.innerHTML = `${medicine.name} ${medicine.manufacturer}</a>`;
+
+                li.addEventListener('click', () => {
+                    window.location.href = `medicine/${medicine.id}`;
+                });
+
+                validMedicineList.append(li);
+            }
+        }
+    </script>
+{% endblock %}
