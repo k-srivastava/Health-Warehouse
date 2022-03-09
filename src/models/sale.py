@@ -23,18 +23,30 @@ class Sale:
 
     def __post_init__(self):
         """
-        Assign a new unique random ID for the medicine if not provided in the constructor.
+        Assign a new unique random ID for the sale if not provided in the constructor.
         """
         if self.id is None:
             self.id = Sale.generate_random_id()
 
     def add_to_database(self):
         """
-        Add the medicine data to the database using a MySQL command.
+        Add the sale data to the database using a MySQL command.
         """
         command = f'''
             INSERT INTO health_warehouse_db.sales
             VALUES ({self.id}, '{self.date}', {self.medicine_id}, {self.quantity})
+        '''
+
+        src.database.connection.add_to_database(command)
+
+    def drop_from_database(self):
+        """
+        Remove the sale data from the database using a MySQL command.
+        """
+        command = f'''
+            DELETE
+            FROM health_warehouse_db.sales
+            WHERE id = {self.id}
         '''
 
         src.database.connection.add_to_database(command)

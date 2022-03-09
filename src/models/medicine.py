@@ -4,11 +4,12 @@ Main medicine file. Generate all the database models for the medicines in the My
 from __future__ import annotations
 
 import random
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from datetime import date
 from typing import Any
 
 import src.database.connection
+from src.models.sale import Sale
 
 
 @dataclass
@@ -30,7 +31,7 @@ class Medicine:
     purchase_date: date
     expiry_date: date
 
-    salts: list[str] = field(default_factory=list)
+    salts: str
     stock: int = 0
 
     def __post_init__(self):
@@ -84,6 +85,44 @@ class Medicine:
         '''
 
         src.database.connection.add_to_database(command)
+
+    def drop_from_database(self):
+        """
+        Remove the sale data from the database using a MySQL command.
+        """
+        command = f'''
+            DELETE
+            FROM health_warehouse_db.medicines
+            WHERE id = {self.id}
+        '''
+
+        sales: list[Sale] = Sale.get_all()
+
+        # Remove all related medicine sales from the database as well.
+        for sale in sales:
+            if sale.medicine_id == self.id:
+                sale.drop_from_database()
+
+        src.database.connection.add_to_database(command)
+
+    def get_salt_alternatives(self) -> list[Medicine]:
+        """
+        Get all the medicines that can be used as alternatives based on common salts.
+
+        :return: List of all medicines that share at least one common salt.
+        :rtype: list[Medicine]
+        """
+        medicines: list[Medicine] = Medicine.get_all()
+        alternatives: list[Medicine] = []
+
+        medicines.remove(self)
+
+        for salt in self.salts.lower().split(', '):
+            for medicine in medicines:
+                if salt in medicine.salts.lower().split(', '):
+                    alternatives.append(medicine)
+
+        return alternatives
 
     @staticmethod
     def update_in_database(medicine_id: int, field_name: str, new_value: Any):
