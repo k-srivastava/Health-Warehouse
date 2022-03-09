@@ -10,10 +10,10 @@
 
 {% block select_field %}
     <div class="select-field">
-        <label>Medicine ID</label>
-        <select name="medicine-id" id="medicine-id" onchange="updateFields()">
+        <label>Medicine Name</label>
+        <select name="medicine-name" id="medicine-name" onchange="updateFields()">
             {% for medicine in all_medicines %}
-                <option name="medicine-id" value="{{ medicine.id }}">{{ medicine.id }}</option>
+                <option name="medicine-name" value="{{ medicine.name }}">{{ medicine.name }}</option>
             {% endfor %}
         </select>
     </div>
@@ -26,7 +26,7 @@
     </div>
 
     <div class="field" id="readonly-field">
-        <input type="text" name="name" readonly>
+        <input type="number" name="medicine-id" readonly>
         <label>Name</label>
     </div>
 
@@ -47,14 +47,15 @@
     <script src="{{ url_for('static', filename='scripts/currentMedicine.js') }}"></script>
 
     <script>
-        const medicineData = JSON.parse({{ medicines_json|tojson }})
-        const medicineNameField = document.getElementsByName('name')[0]
-
+        const medicineData = JSON.parse({{ medicines_json|tojson }});
+        const medicineIdField = document.getElementsByName('medicine-id')[0];
         let currentMedicine;
+
+        console.log(medicineIdField.value);
 
         function updateFields() {
             currentMedicine = getCurrentMedicine(medicineData);
-            medicineNameField.value = currentMedicine.name;
+            medicineIdField.value = currentMedicine.id;
         }
     </script>s
 {% endblock %}
