@@ -27,7 +27,7 @@
                     <th>Stock</th>
                 </tr>
 
-                {% for medicine in medicines %}
+                {% for medicine in medicines[-7:] %}
                     <tr>
                         <td>{{ medicine.id }}</td>
                         <td>{{ medicine.name }}</td>
@@ -48,6 +48,8 @@
             <a href="/account/warehouse/add-medicine">Add Medicine</a>
             <br>
             <a href="/account/warehouse/update-stock">Update Stock</a>
+            <br>
+            <a href="/account/warehouse/medicine-list">Medicine List</a>
         </div>
 
         <div class="data-table">
@@ -58,6 +60,7 @@
                     <th>ID</th>
                     <th>Date</th>
                     <th>Medicine ID</th>
+                    <th>Medicine Name</th>
                     <th>Quantity</th>
                 </tr>
 
@@ -66,6 +69,11 @@
                         <td>{{ sale.id }}</td>
                         <td class="dates">{{ sale.date }}</td>
                         <td>{{ sale.medicine_id }}</td>
+                        {% for medicine in medicines %}
+                            {% if medicine.id == sale.medicine_id %}
+                                <td>{{ medicine.name }}</td>
+                            {% endif %}
+                        {% endfor %}
                         <td>{{ sale.quantity }}</td>
                     </tr>
                 {% endfor %}
