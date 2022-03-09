@@ -41,3 +41,20 @@ function getValidMedicines(medicineData) {
 
     return validMedicines.slice(0, 6);
 }
+
+function getMatchingResult(medicineData, validMedicineList) {
+    const validMedicines = getValidMedicines(medicineData);
+
+    validMedicineList.innerHTML = null;
+
+    for (let medicine of validMedicines) {
+        const li = document.createElement('li');
+        li.innerHTML = `${medicine.name} ${medicine.manufacturer}`;
+
+        li.addEventListener('click', () => {
+            window.location.href = `medicine/${medicine.id}`;
+        });
+
+        validMedicineList.append(li);
+    }
+}

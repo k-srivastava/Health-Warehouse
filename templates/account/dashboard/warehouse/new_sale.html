@@ -51,11 +51,9 @@
         const medicineIdField = document.getElementsByName('medicine-id')[0];
         let currentMedicine;
 
-        console.log(medicineIdField.value);
-
         function updateFields() {
             currentMedicine = getCurrentMedicine(medicineData);
             medicineIdField.value = currentMedicine.id;
         }
-    </script>s
+    </script>
 {% endblock %}
