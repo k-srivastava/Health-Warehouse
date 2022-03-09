@@ -208,3 +208,21 @@ def warehouse_new_sale() -> Response | str:
         )
 
     return redirect(url_for('account.login'))
+
+
+@account.route('/warehouse/medicine-list')
+def warehouse_medicine_list() -> Response | str:
+    if 'email_address' in session:
+        return render_template('account/dashboard/warehouse/medicine_list.html', medicines=Medicine.get_all(),
+                               medicines_json=Medicine.get_as_json())
+
+    return redirect(url_for('account.login'))
+
+
+@account.route('warehouse/medicine/<medicine_id>')
+def warehouse_medicine(medicine_id) -> Response | str:
+    if 'email_address' in session:
+        return render_template('account/dashboard/warehouse/medicine_detail.html',
+                               medicine=Medicine.get_by_id(medicine_id))
+
+    return redirect(url_for('account.login'))
