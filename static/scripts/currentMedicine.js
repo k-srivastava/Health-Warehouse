@@ -42,6 +42,13 @@ function getValidMedicines(medicineData) {
     return validMedicines.slice(0, 6);
 }
 
+/**
+ * Create a new HTML list element with the medicine details that match the query in the search box and add that list
+ * element to an unordered list on the page.
+ *
+ * @param medicineData Data of all medicines in the database as a JavaScript object.
+ * @param validMedicineList Unordered HTML list to which medicines are appended as list elements.
+ */
 function getMatchingResult(medicineData, validMedicineList) {
     const validMedicines = getValidMedicines(medicineData);
 

@@ -21,8 +21,8 @@ def login() -> Response | str:
     """
     Main login page for the project.
 
-    :return: Returns either the rendering of the template for 'login.html' if the user does not already have a session,
-             else returns a redirect to the dashboard page.
+    :return: If the user is logged in, rendering of the template for 'login.html' else, a redirect to the login
+             page.
     :rtype: Response | str
     """
     login_message = ''
@@ -82,7 +82,7 @@ def profile() -> Response | str:
     """
     Profile page where employee information is displayed.
 
-    :return: If the user is logged in, rendering of the template for 'dashboard.html' else, a redirect to the login
+    :return: If the user is logged in, rendering of the template for 'profile.html' else, a redirect to the login
              page.
     :rtype: Response | str
     """
@@ -98,7 +98,7 @@ def warehouse() -> Response | str:
     """
     Warehouse page where data related to medicines stored, their stock and sales made is shown as tables.
 
-    :return: If the user is logged in, rendering of the template for 'dashboard.html' else, a redirect to the login
+    :return: If the user is logged in, rendering of the template for 'warehouse.html' else, a redirect to the login
              page.
     :rtype: Response | str
     """
@@ -114,7 +114,7 @@ def warehouse_add_medicine() -> Response | str:
     """
     Add medicine page where new medicines for the database can be added using a form.
 
-    :return: If the user is logged in, rendering of the template for 'dashboard.html' else, a redirect to the login
+    :return: If the user is logged in, rendering of the template for 'add_medicine.html' else, a redirect to the login
              page.
     :rtype: Response | str
     """
@@ -153,7 +153,7 @@ def warehouse_update_stock() -> Response | str:
     """
     Update stock page where stock of existing medicines can be updated using a form.
 
-    :return: If the user is logged in, rendering of the template for 'dashboard.html' else, a redirect to the login
+    :return: If the user is logged in, rendering of the template for 'update_stock.html' else, a redirect to the login
              page.
     :rtype: Response | str
     """
@@ -183,7 +183,7 @@ def warehouse_new_sale() -> Response | str:
     """
     New sale page where new sales can be logged using a form.
 
-    :return: If the user is logged in, rendering of the template for 'dashboard.html' else, a redirect to the login
+    :return: If the user is logged in, rendering of the template for 'new_sale.html' else, a redirect to the login
              page.
     :rtype: Response | str
     """
@@ -212,6 +212,13 @@ def warehouse_new_sale() -> Response | str:
 
 @account.route('/warehouse/medicine-list')
 def warehouse_medicine_list() -> Response | str:
+    """
+    Custom list view for each medicine in the database.
+
+    :return: If the user is logged in, rendering of the template for 'medicine_list.html' else, a redirect to the login
+             page.
+    :rtype: Response | str
+    """
     if 'email_address' in session:
         return render_template('account/dashboard/warehouse/medicine_list.html', medicines=Medicine.get_all(),
                                medicines_json=Medicine.get_as_json())
@@ -221,6 +228,15 @@ def warehouse_medicine_list() -> Response | str:
 
 @account.route('warehouse/medicine/<medicine_id>')
 def warehouse_medicine(medicine_id: int) -> Response | str:
+    """
+    Custom page view for each medicine in the database with corresponding actions.
+
+    :param medicine_id: Medicine ID to identify the medicine; primary key.
+    :type medicine_id: int
+    :return: If the user is logged in, rendering of the template for 'medicine_detail.html' else, a redirect to the
+             login page.
+    :rtype: Response | str
+    """
     if 'email_address' in session:
         return render_template('account/dashboard/warehouse/medicine_detail.html',
                                medicine=Medicine.get_by_id(medicine_id), today=datetime.date.today())
@@ -230,6 +246,15 @@ def warehouse_medicine(medicine_id: int) -> Response | str:
 
 @account.route('warehouse/medicine/<medicine_id>/delete')
 def warehouse_medicine_delete(medicine_id: int) -> Response | str:
+    """
+    Pseudo-page to delete a specific medicine from the database. Immediately redirects to the main warehouse page.
+
+    :param medicine_id: Medicine ID to identify the medicine; primary key.
+    :type medicine_id: int
+    :return: If the user is logged in, rendering of the template for 'medicine_delete.html' else, a redirect to the
+             login page.
+    :rtype: Response | str
+    """
     if 'email_address' in session:
         return render_template('account/dashboard/warehouse/medicine_delete.html',
                                medicine=Medicine.get_by_id(medicine_id))

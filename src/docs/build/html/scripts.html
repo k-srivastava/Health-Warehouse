@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>JavaScript &mdash; Health Warehouse 0.9.5 documentation</title>
@@ -46,6 +46,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#current-medicine">Current Medicine</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#dashboard-percent-to-css">Dashboard Percent To CSS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#image-picker">Image Picker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#medicine-detail-cards">Medicine Detail Cards</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#toggle-theme">Toggle Theme</a></li>
 </ul>
 </li>
@@ -91,13 +92,44 @@
 <span class="sig-prename descclassname"><span class="n"><span class="pre">currentMedicine</span></span><span class="p"><span class="pre">.</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">getCurrentMedicine</span></span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">medicineData</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#currentMedicine.getCurrentMedicine" title="Permalink to this definition"></a></dt>
 <dd><p>Get the currently selected medicine from its ID by matching against all medicines in the database.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Arguments</dt>
+<dt class="field-odd">Arguments<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>medicineData</strong> – Data of all medicines in the database as JavaScript objects.</p></li>
+<li><p><strong>medicineData</strong> – Data of all medicines in the database as a JavaScript object.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Current medicine being selected.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt class="sig sig-object js" id="currentMedicine.getValidMedicines">
+<span class="sig-prename descclassname"><span class="n"><span class="pre">currentMedicine</span></span><span class="p"><span class="pre">.</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">getValidMedicines</span></span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">medicineData</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#currentMedicine.getValidMedicines" title="Permalink to this definition"></a></dt>
+<dd><p>Get the matching medicine from the search bar by checking it against all medicine names in the database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>medicineData</strong> – Data of all medicines in the database as a JavaScript object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array of all matching medicines.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt class="sig sig-object js" id="currentMedicine.getMatchingResult">
+<span class="sig-prename descclassname"><span class="n"><span class="pre">currentMedicine</span></span><span class="p"><span class="pre">.</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">getMatchingResult</span></span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">medicineData</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validMedicineList</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#currentMedicine.getMatchingResult" title="Permalink to this definition"></a></dt>
+<dd><p>Create a new HTML list element with the medicine details that match the query in the search box and add that list
+element to an unordered list on the page.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>medicineData</strong> – Data of all medicines in the database as a JavaScript object.</p></li>
+<li><p><strong>validMedicineList</strong> – Unordered HTML list to which medicines are appended as list elements.</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -125,9 +157,46 @@
 <span class="sig-prename descclassname"><span class="n"><span class="pre">imagePicker</span></span><span class="p"><span class="pre">.</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">thumbnailPicker</span></span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#imagePicker.thumbnailPicker" title="Permalink to this definition"></a></dt>
 <dd><p>Function to change the main display image when the smaller thumbnail images are selected.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Arguments</dt>
+<dt class="field-odd">Arguments<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>image</strong> – Thumbnail image being selected.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="medicine-detail-cards">
+<h2>Medicine Detail Cards<a class="headerlink" href="#medicine-detail-cards" title="Permalink to this headline"></a></h2>
+<dl class="js data">
+<dt class="sig sig-object js" id="id2">
+<span class="sig-name descname"><span class="n"><span class="pre">File</span> <span class="pre">Description</span></span></span><a class="headerlink" href="#id2" title="Permalink to this definition"></a></dt>
+<dd><p>Script to toggle the visibility of medicine warning and information cards.</p>
+</dd></dl>
+
+<dl class="js function">
+<dt class="sig sig-object js" id="medicineDetailCards.showWarningCard">
+<span class="sig-prename descclassname"><span class="n"><span class="pre">medicineDetailCards</span></span><span class="p"><span class="pre">.</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">showWarningCard</span></span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">warningCard</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">infoCard</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#medicineDetailCards.showWarningCard" title="Permalink to this definition"></a></dt>
+<dd><p>Toggle the visibility of the medicine warning card.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>warningCard</strong> – Medicine warning card.</p></li>
+<li><p><strong>infoCard</strong> – Medicine information card.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="js function">
+<dt class="sig sig-object js" id="medicineDetailCards.showInfoCard">
+<span class="sig-prename descclassname"><span class="n"><span class="pre">medicineDetailCards</span></span><span class="p"><span class="pre">.</span></span></span><span class="sig-name descname"><span class="n"><span class="pre">showInfoCard</span></span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">infoCard</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">warningCard</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#medicineDetailCards.showInfoCard" title="Permalink to this definition"></a></dt>
+<dd><p>Toggle the visibility of the medicine information card.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Arguments<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>infoCard</strong> – Medicine information card.</p></li>
+<li><p><strong>warningCard</strong> – Medicine warning card.</p></li>
 </ul>
 </dd>
 </dl>
@@ -137,8 +206,8 @@
 <section id="toggle-theme">
 <h2>Toggle Theme<a class="headerlink" href="#toggle-theme" title="Permalink to this headline"></a></h2>
 <dl class="js data">
-<dt class="sig sig-object js" id="id2">
-<span class="sig-name descname"><span class="n"><span class="pre">File</span> <span class="pre">Description</span></span></span><a class="headerlink" href="#id2" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object js" id="id3">
+<span class="sig-name descname"><span class="n"><span class="pre">File</span> <span class="pre">Description</span></span></span><a class="headerlink" href="#id3" title="Permalink to this definition"></a></dt>
 <dd><p>Script to toggle the website theme between light and dark mode.</p>
 </dd></dl>
 
