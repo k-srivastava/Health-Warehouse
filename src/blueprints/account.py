@@ -220,9 +220,18 @@ def warehouse_medicine_list() -> Response | str:
 
 
 @account.route('warehouse/medicine/<medicine_id>')
-def warehouse_medicine(medicine_id) -> Response | str:
+def warehouse_medicine(medicine_id: int) -> Response | str:
     if 'email_address' in session:
         return render_template('account/dashboard/warehouse/medicine_detail.html',
+                               medicine=Medicine.get_by_id(medicine_id), today=datetime.date.today())
+
+    return redirect(url_for('account.login'))
+
+
+@account.route('warehouse/medicine/<medicine_id>/delete')
+def warehouse_medicine_delete(medicine_id: int) -> Response | str:
+    if 'email_address' in session:
+        return render_template('account/dashboard/warehouse/medicine_delete.html',
                                medicine=Medicine.get_by_id(medicine_id))
 
     return redirect(url_for('account.login'))

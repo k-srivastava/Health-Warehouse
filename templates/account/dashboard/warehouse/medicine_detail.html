@@ -39,7 +39,7 @@
         </div>
     </div>
 
-    <div class="action-card" onclick="confirmDeleteMedicine()">
+    <div class="action-card" onclick="confirmDeleteMedicine({{ medicine.id }})">
         <span class="icon"><i class="fa fa-trash" aria-hidden="true"></i></span>
     </div>
 
@@ -52,7 +52,11 @@
     </div>
 
     <div class="warning-card">
-        <p>This medicine has expired! Please consider replacing it or listing alternatives with similar salts.</p>
+        {% if medicine.expiry_date < today %}
+            <p>This medicine has expired! Please consider replacing it or listing alternatives with similar salts.</p>
+        {% else %}
+            <p>Nothing to see here!</p>
+        {% endif %}
     </div>
 
     <div class="info-card">
@@ -63,7 +67,8 @@
                 <li>{{ medicine.name }} has salt alternatives:</li>
                 <br>
                 {% for alternative in medicine.get_salt_alternatives() %}
-                    <li onclick="window.location.href = {{ alternative.id }}">{{ alternative.name }} — {{ alternative.manufacturer }}</li>
+                    <li onclick="window.location.href = {{ alternative.id }}">{{ alternative.name }}
+                        — {{ alternative.manufacturer }}</li>
                 {% endfor %}
             {% endif %}
         </ul>
@@ -77,12 +82,10 @@
         const warningCard = document.getElementsByClassName('warning-card')[0];
         const infoCard = document.getElementsByClassName('info-card')[0];
 
-        function confirmDeleteMedicine() {
+        function confirmDeleteMedicine(medicineId) {
             if (confirm('Are you sure you want to delete this medicine and all related data?')) {
                 if (confirm('This action cannot be undone! Proceed?')) {
-                    window.location.replace('/account/warehouse');
-
-                    // TODO: Deletion code here.
+                    window.location.replace(`${medicineId}/delete`);
                 }
             }
         }
