@@ -9,10 +9,10 @@
 
 {% block select_field %}
     <div class="select-field">
-        <label>Medicine ID</label>
-        <select name="id" id="medicine-id" onchange="updateFields()">
+        <label>Medicine Name</label>
+        <select name="id" id="medicine-name" onchange="updateFields()">
             {% for medicine in all_medicines %}
-                <option value="{{ medicine.id }}">{{ medicine.id }}</option>
+                <option value="{{ medicine.name }}">{{ medicine.name }}</option>
             {% endfor %}
         </select>
     </div>
@@ -21,7 +21,7 @@
 {% block fields %}
     <div class="field" id="readonly-field">
         <input type="text" name="name" readonly>
-        <label>Name</label>
+        <label>Medicine ID</label>
     </div>
 
     <div class="field" id="readonly-field">
@@ -57,7 +57,7 @@
         function updateFields() {
             currentMedicine = getCurrentMedicine(medicineData);
             
-            medicineNameField.value = currentMedicine.name;
+            medicineNameField.value = currentMedicine.id;
             medicineManufacturerField.value = currentMedicine.manufacturer;
             medicineCurrentStockField.value = currentMedicine.stock;
         }
